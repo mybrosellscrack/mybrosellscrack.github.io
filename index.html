@@ -18,6 +18,7 @@
       <section id="view-home" class="view active">
         <div class="card menu-card">
           <h2>Главное меню</h2>
+          <p class="hint">Выберите нужный раздел дневника: новая запись, архив, подготовка к исповеди, статистика или резерв.</p>
           <p class="notice">
             Важно: раз в неделю делайте экспорт данных, чтобы иметь резервную копию.
           </p>
@@ -38,6 +39,7 @@
             <button class="btn ghost" data-nav="home">Домой</button>
             <h2>Новая запись</h2>
           </div>
+          <p class="hint">Заполните ситуацию, последствия и инсайт. Контекст необязателен. Записи хранятся локально в вашем браузере.</p>
           <form id="new-entry-form" class="form">
             <label>
               Ситуация (обязательно)
@@ -66,6 +68,7 @@
             <button class="btn ghost" data-nav="home">Домой</button>
             <h2>Архив</h2>
           </div>
+          <p class="hint">Здесь все записи. Можно редактировать и удалять. Данные не отправляются на сервер.</p>
           <div id="archive-list" class="list"></div>
           <p id="archive-empty" class="empty">Записей пока нет.</p>
         </div>
@@ -77,6 +80,7 @@
             <button class="btn ghost" data-nav="home">Домой</button>
             <h2>Подготовка к исповеди</h2>
           </div>
+          <p class="hint">Записи сгруппированы по неделям. Отметьте неделю как исповеданную — через 3 дня она скрывается из списка.</p>
           <div id="confession-list" class="list"></div>
           <p id="confession-empty" class="empty">Нет недель для отображения.</p>
         </div>
@@ -88,6 +92,7 @@
             <button class="btn ghost" data-nav="home">Домой</button>
             <h2>Статистика</h2>
           </div>
+          <p class="hint">Сводка по повторяющимся ситуациям: сколько раз каждая встречалась.</p>
           <div id="stats-list" class="list"></div>
           <p id="stats-empty" class="empty">Данных пока нет.</p>
         </div>
@@ -99,6 +104,7 @@
             <button class="btn ghost" data-nav="home">Домой</button>
             <h2>Резерв / Восстановление</h2>
           </div>
+          <p class="hint">Экспорт сохраняет CSV-файл. Импорт заменяет текущие данные из файла.</p>
           <div class="backup-actions">
             <button class="btn primary" id="export-csv">Экспорт CSV</button>
             <label class="btn">

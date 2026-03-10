@@ -77,6 +77,16 @@ body {
   margin: 10px 0 18px;
 }
 
+.hint {
+  background: rgba(58, 95, 111, 0.06);
+  border-left: 4px solid rgba(58, 95, 111, 0.4);
+  padding: 8px 12px;
+  border-radius: 10px;
+  color: var(--muted);
+  font-size: 13px;
+  margin: 10px 0 12px;
+}
+
 .menu-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
