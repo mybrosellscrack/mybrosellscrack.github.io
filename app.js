@@ -509,7 +509,8 @@ function updateBackupReminder() {
 
   if (!lastBackup) {
     reminder.style.display = "block";
-    reminder.textContent = "Сделайте первый бэкап, чтобы сохранить свои записи.";
+    reminder.innerHTML = "⚠️ Сделайте первый бэкап, чтобы сохранить свои записи!";
+    reminder.onclick = () => navigate("backup");
     return;
   }
 
@@ -518,14 +519,8 @@ function updateBackupReminder() {
 
   if (diffDays >= 6) {
     reminder.style.display = "block";
-    reminder.innerHTML = `
-      ⚠️ Пора сделать резервную копию! <br>
-      Последний бэкап: ${formatDateOnly(lastBackup)} (${diffDays} дней назад).<br>
-      <button class="btn primary" id="backup-now-btn">Скачать бэкап</button>
-    `;
-    document.getElementById("backup-now-btn").addEventListener("click", () => {
-      exportCsv();
-    });
+    reminder.innerHTML = `⚠️ Пора сделать резервную копию!<br>Последний бэкап: ${formatDateOnly(lastBackup)} (${diffDays} дней назад). Нажмите, чтобы перейти.`;
+    reminder.onclick = () => navigate("backup");
   } else {
     reminder.style.display = "none";
   }
@@ -644,6 +639,14 @@ editForm.addEventListener("submit", (event) => {
 });
 
 editCancel.addEventListener("click", closeEditModal);
+
+document.getElementById("help-btn").addEventListener("click", () => {
+  document.getElementById("help-modal").classList.remove("hidden");
+});
+
+document.getElementById("help-close").addEventListener("click", () => {
+  document.getElementById("help-modal").classList.add("hidden");
+});
 
 document.getElementById("reset-data").addEventListener("click", resetData);
 

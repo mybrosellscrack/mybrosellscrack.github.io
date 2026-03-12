@@ -18,16 +18,17 @@
       <section id="view-home" class="view active">
         <div class="card menu-card">
           <h2>Главное меню</h2>
-          <p class="hint">Выберите нужный раздел дневника: новая запись, архив, подготовка к исповеди, статистика или резерв.</p>
+          <button class="btn ghost" id="help-btn" style="margin-bottom: 16px;">❓ Как пользоваться приложением</button>
+          <p id="backup-reminder" class="notice" style="display:none; background: #d34a3f; color: #fff; padding: 12px; border-radius: 8px; cursor: pointer; text-align: center;" data-nav="backup"></p>
           <p class="notice">
             Важно: раз в неделю делайте экспорт данных, чтобы иметь резервную копию.
           </p>
           <div class="menu-grid">
             <button class="btn primary" data-nav="new">Новая запись</button>
-            <button class="btn" data-nav="archive">Архив</button>
             <button class="btn" data-nav="confession">Подготовка к исповеди</button>
             <button class="btn" data-nav="situations">Ситуации</button>
             <button class="btn" data-nav="stats">Статистика слабостей</button>
+            <button class="btn" data-nav="archive">Архив</button>
             <button class="btn" data-nav="backup">Резерв / Восстановление</button>
             <button class="btn danger" id="reset-data">Сбросить данные</button>
           </div>
@@ -127,7 +128,6 @@
             <h2>Резерв / Восстановление</h2>
           </div>
           <p class="hint">Экспорт сохраняет CSV-файл. Импорт заменяет текущие данные из файла.</p>
-          <p id="backup-reminder" class="notice" style="display:none;"></p>
           <div class="backup-actions">
             <button class="btn primary" id="export-csv">Экспорт CSV</button>
             <label class="btn">
@@ -138,6 +138,25 @@
           </div>
         </div>
       </section>
+
+      <!-- Модальное окно справки -->
+      <div id="help-modal" class="modal hidden" role="dialog" aria-modal="true">
+        <div class="modal-content">
+          <h3>📖 Как пользоваться приложением</h3>
+          <div class="help-content">
+            <p><strong>Новая запись</strong> — добавьте запись о грехе или жизненной ситуации. Заполните обязательные поля: ситуация, последствие, инсайт. Контекст необязателен.</p>
+            <p><strong>Архив</strong> — просмотр всех записей. Можно редактировать и удалять записи.</p>
+            <p><strong>Подготовка к исповеди</strong> — записи сгруппированы по неделям. Отметьте неделю как исповеданную — через 3 дня она скроется из списка.</p>
+            <p><strong>Ситуации</strong> — отдельный раздел для анализа жизненных событий (не грехи). Не попадают в подготовку к исповеди.</p>
+            <p><strong>Статистика слабостей</strong> — показывает, какие грехи повторяются чаще всего.</p>
+            <p><strong>Резерв / Восстановление</strong> — экспорт данных в CSV-файл и импорт из резервной копии. Данные хранятся только в браузере!</p>
+            <p class="notice" style="background: #fff3cd; color: #856404; padding: 10px; border-radius: 4px;"><strong>Важно:</strong> делайте бэкап раз в неделю. Данные хранятся локально в браузере и могут быть потеряны при очистке.</p>
+          </div>
+          <div class="modal-actions">
+            <button type="button" class="btn primary" id="help-close">Понятно</button>
+          </div>
+        </div>
+      </div>
     </main>
 
     <div id="edit-modal" class="modal hidden" role="dialog" aria-modal="true">

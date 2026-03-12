@@ -333,3 +333,17 @@ body {
 .btn-toggle:hover:not(.active) {
   background: rgba(43, 42, 40, 0.05);
 }
+
+/* Стили для справки */
+.help-content {
+  margin: 16px 0;
+}
+
+.help-content p {
+  margin: 0 0 12px;
+  line-height: 1.5;
+}
+
+.help-content p:last-child {
+  margin-bottom: 0;
+}
