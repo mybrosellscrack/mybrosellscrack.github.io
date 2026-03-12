@@ -301,3 +301,35 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* Стили для переключателя типа записи */
+.form-group {
+  margin-bottom: 12px;
+}
+
+.toggle-group {
+  display: flex;
+  gap: 4px;
+  margin-top: 6px;
+}
+
+.btn-toggle {
+  flex: 1;
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(43, 42, 40, 0.15);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-toggle.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.btn-toggle:hover:not(.active) {
+  background: rgba(43, 42, 40, 0.05);
+}

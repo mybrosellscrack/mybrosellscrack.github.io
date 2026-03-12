@@ -26,7 +26,8 @@
             <button class="btn primary" data-nav="new">Новая запись</button>
             <button class="btn" data-nav="archive">Архив</button>
             <button class="btn" data-nav="confession">Подготовка к исповеди</button>
-            <button class="btn" data-nav="stats">Статистика</button>
+            <button class="btn" data-nav="situations">Ситуации</button>
+            <button class="btn" data-nav="stats">Статистика слабостей</button>
             <button class="btn" data-nav="backup">Резерв / Восстановление</button>
             <button class="btn danger" id="reset-data">Сбросить данные</button>
           </div>
@@ -39,7 +40,16 @@
             <button class="btn ghost" data-nav="home">Домой</button>
             <h2>Новая запись</h2>
           </div>
-          <p class="hint">Заполните ситуацию, последствия и инсайт. Контекст необязателен. Записи хранятся локально в вашем браузере.</p>
+          <p class="hint">Выберите тип записи: "Грех" — для подготовки к исповеди или "Ситуация" — для анализа жизненных событий. Заполните обязательные поля. Записи хранятся локально в вашем браузере.</p>
+          <div class="form-group">
+            <label>
+              Тип записи
+              <div class="toggle-group">
+                <button type="button" class="btn-toggle active" data-type="sin">Грех</button>
+                <button type="button" class="btn-toggle" data-type="situation">Ситуация</button>
+              </div>
+            </label>
+          </div>
           <form id="new-entry-form" class="form">
             <label>
               Ситуация (обязательно)
@@ -86,13 +96,25 @@
         </div>
       </section>
 
+      <section id="view-situations" class="view">
+        <div class="card">
+          <div class="view-header">
+            <button class="btn ghost" data-nav="home">Домой</button>
+            <h2>Ситуации</h2>
+          </div>
+          <p class="hint">Здесь отображаются все записи типа "Ситуация". Они не попадают в подготовку к исповеди.</p>
+          <div id="situations-list" class="list"></div>
+          <p id="situations-empty" class="empty">Записей пока нет.</p>
+        </div>
+      </section>
+
       <section id="view-stats" class="view">
         <div class="card">
           <div class="view-header">
             <button class="btn ghost" data-nav="home">Домой</button>
-            <h2>Статистика</h2>
+            <h2>Статистика слабостей</h2>
           </div>
-          <p class="hint">Сводка по повторяющимся ситуациям: сколько раз каждая встречалась.</p>
+          <p class="hint">Сводка по повторяющимся грехам — вашим духовным слабостям.</p>
           <div id="stats-list" class="list"></div>
           <p id="stats-empty" class="empty">Данных пока нет.</p>
         </div>

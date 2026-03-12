@@ -6,6 +6,7 @@ const views = {
   archive: document.getElementById("view-archive"),
   confession: document.getElementById("view-confession"),
   stats: document.getElementById("view-stats"),
+  situations: document.getElementById("view-situations"),
   backup: document.getElementById("view-backup"),
 };
 
@@ -15,6 +16,8 @@ const confessionList = document.getElementById("confession-list");
 const confessionEmpty = document.getElementById("confession-empty");
 const statsList = document.getElementById("stats-list");
 const statsEmpty = document.getElementById("stats-empty");
+const situationsList = document.getElementById("situations-list");
+const situationsEmpty = document.getElementById("situations-empty");
 const backupStatus = document.getElementById("backup-status");
 
 const editModal = document.getElementById("edit-modal");
@@ -22,6 +25,26 @@ const editForm = document.getElementById("edit-entry-form");
 const editCancel = document.getElementById("edit-cancel");
 
 let editingId = null;
+let currentEntryType = "sin"; // 'sin' или 'situation'
+
+// Получаем элементы переключателя
+const toggleSin = document.querySelector("[data-type='sin']");
+const toggleSituation = document.querySelector("[data-type='situation']");
+
+// Обработчики кликов по кнопкам переключения
+if (toggleSin && toggleSituation) {
+  toggleSin.addEventListener("click", () => {
+    currentEntryType = "sin";
+    toggleSin.classList.add("active");
+    toggleSituation.classList.remove("active");
+  });
+
+  toggleSituation.addEventListener("click", () => {
+    currentEntryType = "situation";
+    toggleSituation.classList.add("active");
+    toggleSin.classList.remove("active");
+  });
+}
 
 function loadState() {
   const raw = localStorage.getItem(STORAGE_KEY);
@@ -146,6 +169,7 @@ function renderStats() {
   const state = loadState();
   const counts = {};
   state.entries.forEach((entry) => {
+    if (entry.type !== "sin") return; // Только грехи
     const label = entry.situation.trim().toLowerCase() || "без названия";
     counts[label] = (counts[label] || 0) + 1;
   });
@@ -175,6 +199,7 @@ function renderConfession() {
   const state = loadState();
   const weekMap = {};
   state.entries.forEach((entry) => {
+    if (entry.type !== "sin") return; // Только грехи
     const weekStart = weekStartFromEntry(entry.date);
     weekMap[weekStart] = weekMap[weekStart] || [];
     weekMap[weekStart].push(entry);
@@ -242,6 +267,54 @@ function renderConfession() {
   });
 }
 
+function renderSituations() {
+  const state = loadState();
+  const entries = state.entries
+    .filter(entry => entry.type === "situation")
+    .sort((a, b) => (a.date < b.date ? 1 : -1));
+
+  situationsList.innerHTML = "";
+
+  if (entries.length === 0) {
+    situationsEmpty.style.display = "block";
+    return;
+  }
+  situationsEmpty.style.display = "none";
+
+  entries.forEach((entry, index) => {
+    const card = document.createElement("div");
+    card.className = "entry-card";
+    card.style.animationDelay = `${Math.min(index * 40, 200)}ms`;
+    card.innerHTML = `
+      <div class="entry-meta">${entry.date}</div>
+      <div><strong>${escapeHtml(entry.situation)}</strong></div>
+      <div>Контекст: ${escapeHtml(entry.context || "-")}</div>
+      <div>Последствие: ${escapeHtml(entry.consequence)}</div>
+      <div>Инсайт: ${escapeHtml(entry.insight)}</div>
+      <div class="entry-actions">
+        <button class="btn" data-edit="${entry.id}">Редактировать</button>
+        <button class="btn danger" data-delete="${entry.id}">Удалить</button>
+      </div>
+    `;
+    situationsList.appendChild(card);
+  });
+
+  // Одинаковые обработчики редактирования и удаления как в архиве
+  situationsList.querySelectorAll("[data-edit]").forEach((btn) => {
+    btn.addEventListener("click", (event) => {
+      const id = event.currentTarget.getAttribute("data-edit");
+      openEditModal(id);
+    });
+  });
+
+  situationsList.querySelectorAll("[data-delete]").forEach((btn) => {
+    btn.addEventListener("click", (event) => {
+      const id = event.currentTarget.getAttribute("data-delete");
+      deleteEntry(id);
+    });
+  });
+}
+
 function escapeHtml(value) {
   return String(value)
     .replaceAll("&", "&amp;")
@@ -269,6 +342,7 @@ function addEntry(formData) {
     context: context || "",
     consequence,
     insight,
+    type: currentEntryType, // Записываем тип
   };
 
   state.entries.push(entry);
@@ -287,6 +361,7 @@ function deleteEntry(id) {
   renderArchive();
   renderStats();
   renderConfession();
+  renderSituations();
 }
 
 function openEditModal(id) {
@@ -340,6 +415,7 @@ function saveEdit(formData) {
   renderArchive();
   renderStats();
   renderConfession();
+  renderSituations();
 }
 
 function toggleConfessed(weekStart) {
@@ -361,6 +437,7 @@ function resetData() {
   renderArchive();
   renderStats();
   renderConfession();
+  renderSituations();
   backupStatus.textContent = "Данные удалены.";
 }
 
@@ -371,7 +448,7 @@ function exportCsv() {
     return;
   }
   const lines = [
-    "date;situation;context;consequence;insight;week_confessed_at",
+    "date;situation;context;consequence;insight;type;week_confessed_at",
   ];
   state.entries.forEach((entry) => {
     const weekStart = weekStartFromEntry(entry.date);
@@ -382,6 +459,7 @@ function exportCsv() {
       entry.context || "",
       entry.consequence,
       entry.insight,
+      entry.type || "sin", // экспорт типа записи
       confessedAt,
     ]
       .map(csvEscape)
@@ -418,6 +496,7 @@ function importCsv(file) {
     renderArchive();
     renderStats();
     renderConfession();
+    renderSituations();
     backupStatus.textContent = "Импорт завершен.";
   };
   reader.readAsText(file);
@@ -444,9 +523,10 @@ function parseCsv(text) {
       context: cells[2] || "",
       consequence: cells[3] || "",
       insight: cells[4] || "",
+      type: cells[5] === "situation" ? "situation" : "sin", // парсинг типа из CSV
     };
     entries.push(entry);
-    const confessedAt = cells[5] || "";
+    const confessedAt = cells[6] || "";
     if (confessedAt) {
       const weekStart = weekStartFromEntry(date);
       confessed[weekStart] = confessedAt;
@@ -491,6 +571,9 @@ document.querySelectorAll("[data-nav]").forEach((btn) => {
     if (target === "stats") {
       renderStats();
     }
+    if (target === "situations") {
+      renderSituations();
+    }
     if (target === "backup") {
       backupStatus.textContent = "";
     }
@@ -502,6 +585,10 @@ document.getElementById("new-entry-form").addEventListener("submit", (event) => 
   event.preventDefault();
   addEntry(new FormData(event.target));
   event.target.reset();
+  // Сбрасываем тип на "Грех"
+  currentEntryType = "sin";
+  toggleSin.classList.add("active");
+  toggleSituation.classList.remove("active");
 });
 
 editForm.addEventListener("submit", (event) => {
@@ -526,3 +613,4 @@ document.getElementById("import-csv").addEventListener("change", (event) => {
 renderArchive();
 renderStats();
 renderConfession();
+renderSituations();
