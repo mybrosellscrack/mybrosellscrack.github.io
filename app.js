@@ -27,24 +27,31 @@ const editCancel = document.getElementById("edit-cancel");
 let editingId = null;
 let currentEntryType = "sin"; // 'sin' или 'situation'
 
-// Получаем элементы переключателя
-const toggleSin = document.querySelector("[data-type='sin']");
-const toggleSituation = document.querySelector("[data-type='situation']");
+let toggleSin, toggleSituation;
 
-// Обработчики кликов по кнопкам переключения
-if (toggleSin && toggleSituation) {
-  toggleSin.addEventListener("click", () => {
-    currentEntryType = "sin";
-    toggleSin.classList.add("active");
-    toggleSituation.classList.remove("active");
-  });
+// Инициализация переключателей после загрузки DOM
+function initToggleButtons() {
+  toggleSin = document.querySelector("[data-type='sin']");
+  toggleSituation = document.querySelector("[data-type='situation']");
 
-  toggleSituation.addEventListener("click", () => {
-    currentEntryType = "situation";
-    toggleSituation.classList.add("active");
-    toggleSin.classList.remove("active");
-  });
+  // Обработчики кликов по кнопкам переключения
+  if (toggleSin && toggleSituation) {
+    toggleSin.addEventListener("click", () => {
+      currentEntryType = "sin";
+      toggleSin.classList.add("active");
+      toggleSituation.classList.remove("active");
+    });
+
+    toggleSituation.addEventListener("click", () => {
+      currentEntryType = "situation";
+      toggleSituation.classList.add("active");
+      toggleSin.classList.remove("active");
+    });
+  }
 }
+
+// Вызываем инициализацию после загрузки страницы
+document.addEventListener("DOMContentLoaded", initToggleButtons);
 
 function loadState() {
   const raw = localStorage.getItem(STORAGE_KEY);
@@ -471,17 +478,57 @@ function exportCsv() {
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url;
-  link.download = "journal_export.csv";
+  link.download = "spiritual-journal-backup-" + formatDateOnly(new Date()) + ".csv";
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
   URL.revokeObjectURL(url);
+
+  // 🔥 Сохраняем дату последнего бэкапа
+  const lastBackup = nowString();
+  const backupState = JSON.parse(localStorage.getItem("backupState") || "{}");
+  backupState.lastBackup = lastBackup;
+  localStorage.setItem("backupState", JSON.stringify(backupState));
+
   backupStatus.textContent = "Экспорт завершен.";
+  updateBackupReminder(); // Обновляем напоминание
 }
 
 function csvEscape(value) {
   const escaped = String(value).replaceAll("\"", "\"\"");
   return `"${escaped}"`;
+}
+
+function updateBackupReminder() {
+  const reminder = document.getElementById("backup-reminder");
+  if (!reminder) return;
+
+  const backupState = JSON.parse(localStorage.getItem("backupState") || "{}");
+  const lastBackup = backupState.lastBackup ? parseDateTime(backupState.lastBackup) : null;
+  const now = new Date();
+
+  if (!lastBackup) {
+    reminder.style.display = "block";
+    reminder.textContent = "Сделайте первый бэкап, чтобы сохранить свои записи.";
+    return;
+  }
+
+  const diffTime = now - lastBackup;
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+  if (diffDays >= 6) {
+    reminder.style.display = "block";
+    reminder.innerHTML = `
+      ⚠️ Пора сделать резервную копию! <br>
+      Последний бэкап: ${formatDateOnly(lastBackup)} (${diffDays} дней назад).<br>
+      <button class="btn primary" id="backup-now-btn">Скачать бэкап</button>
+    `;
+    document.getElementById("backup-now-btn").addEventListener("click", () => {
+      exportCsv();
+    });
+  } else {
+    reminder.style.display = "none";
+  }
 }
 
 function importCsv(file) {
@@ -614,3 +661,6 @@ renderArchive();
 renderStats();
 renderConfession();
 renderSituations();
+
+// Вызываем при запуске
+updateBackupReminder();
