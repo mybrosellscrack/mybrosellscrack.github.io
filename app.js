@@ -736,7 +736,7 @@ function updateYandexStatus() {
     `;
     document.getElementById("connect-yandex").addEventListener("click", () => {
       if (manualDiv) manualDiv.classList.remove("hidden");
-      const authUrl = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${YANDEX_CLIENT_ID}&redirect_uri=https://oauth.yandex.ru/verification_code&display=page&scope=disk:write`;
+      const authUrl = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${YANDEX_CLIENT_ID}&redirect_uri=https://oauth.yandex.ru/verification_code&display=page`;
       window.open(authUrl, "_blank", "width=600,height=700");
     });
   }
