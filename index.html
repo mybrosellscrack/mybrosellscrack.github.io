@@ -10,7 +10,7 @@
     <header class="app-header">
       <div class="brand">
         <div class="title">Духовный дневник</div>
-        <div class="subtitle">Временная веб-версия</div>
+        <div class="subtitle">Веб-приложение</div>
       </div>
     </header>
 
@@ -128,11 +128,6 @@
           </div>
           <p class="hint">Экспорт сохраняет CSV-файл. Импорт заменяет текущие данные из файла.</p>
           <div id="yandex-status"></div>
-          <div id="yandex-manual" class="hidden" style="margin: 12px 0;">
-            <p class="hint">Введите код с сайта Яндекса:</p>
-            <input type="text" id="yandex-code" placeholder="Код из URL (после code=)" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc; margin-bottom: 8px;">
-            <button class="btn primary" id="submit-yandex-code">Подтвердить</button>
-          </div>
           <div class="backup-actions">
             <button class="btn primary" id="export-csv">Экспорт CSV</button>
             <label class="btn">
@@ -140,6 +135,11 @@
               <input type="file" id="import-csv" accept=".csv,text/csv,text/plain" />
             </label>
             <p id="backup-status" class="status"></p>
+          </div>
+          <div id="yandex-manual" class="hidden" style="margin-top: 16px; padding: 12px; background: rgba(58, 95, 111, 0.06); border-radius: 10px;">
+            <p class="hint" style="margin-top: 0;">Введите код с сайта Яндекса:</p>
+            <input type="text" id="yandex-code" placeholder="Код из URL (после code=)" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc; margin-bottom: 8px;">
+            <button class="btn primary" id="submit-yandex-code">Подтвердить</button>
           </div>
         </div>
       </section>
