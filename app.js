@@ -147,9 +147,9 @@ function renderArchive() {
     card.innerHTML = `
       <div class="entry-meta">${entry.date}</div>
       <div><strong>${escapeHtml(entry.situation)}</strong></div>
-      <div>Контекст: ${escapeHtml(entry.context || "-")}</div>
-      <div>Последствие: ${escapeHtml(entry.consequence)}</div>
-      <div>Инсайт: ${escapeHtml(entry.insight)}</div>
+      <div class="entry-field"><strong>Контекст:</strong> ${escapeHtml(entry.context || "-")}</div>
+      <div class="entry-field"><strong>Последствие:</strong> ${escapeHtml(entry.consequence)}</div>
+      <div class="entry-field"><strong>Инсайт:</strong> ${escapeHtml(entry.insight)}</div>
       <div class="entry-actions">
         <button class="btn" data-edit="${entry.id}">Редактировать</button>
         <button class="btn danger" data-delete="${entry.id}">Удалить</button>
@@ -250,16 +250,16 @@ function renderConfession() {
     const entriesSummary = item.entries
       .map((entry) => {
         const ctx = entry.context && entry.context.trim() ? entry.context : "-";
-        return `${entry.situation} - ${ctx}`;
+        return `<div class="week-entry"><strong>Грех:</strong> ${escapeHtml(entry.situation)}<br><span>Контекст: ${escapeHtml(ctx)}</span></div>`;
       })
-      .join("\n");
+      .join("");
     card.innerHTML = `
       <div class="week-header">
         <div><strong>Неделя с ${item.weekStart}</strong></div>
         <div class="week-flag" style="background:${item.confessed ? "#3aa45c" : "#d34a3f"}"></div>
       </div>
       <div>Записей: ${item.entries.length}</div>
-      <div class="week-entries">${escapeHtml(entriesSummary)}</div>
+      <div class="week-entries">${entriesSummary}</div>
       <button class="btn" data-toggle="${item.weekStart}">
         ${item.confessed ? "Отметить как не исповедано" : "Отметить как исповедано"}
       </button>
@@ -296,9 +296,9 @@ function renderSituations() {
     card.innerHTML = `
       <div class="entry-meta">${entry.date}</div>
       <div><strong>${escapeHtml(entry.situation)}</strong></div>
-      <div>Контекст: ${escapeHtml(entry.context || "-")}</div>
-      <div>Последствие: ${escapeHtml(entry.consequence)}</div>
-      <div>Инсайт: ${escapeHtml(entry.insight)}</div>
+      <div class="entry-field"><strong>Контекст:</strong> ${escapeHtml(entry.context || "-")}</div>
+      <div class="entry-field"><strong>Последствие:</strong> ${escapeHtml(entry.consequence)}</div>
+      <div class="entry-field"><strong>Инсайт:</strong> ${escapeHtml(entry.insight)}</div>
       <div class="entry-actions">
         <button class="btn" data-edit="${entry.id}">Редактировать</button>
         <button class="btn danger" data-delete="${entry.id}">Удалить</button>

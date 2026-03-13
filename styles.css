@@ -349,3 +349,52 @@ body {
 .help-content p:last-child {
   margin-bottom: 0;
 }
+
+/* Стили для полей записей */
+.entry-field {
+  margin-top: 4px;
+  font-size: 14px;
+}
+
+.entry-field:first-of-type {
+  margin-top: 8px;
+}
+
+/* Стили для подготовки к исповеди */
+.week-entry {
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(43, 42, 40, 0.08);
+}
+
+.week-entry:last-child {
+  border-bottom: none;
+}
+
+.week-entry span {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* Подвал */
+.app-footer {
+  text-align: center;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.app-footer a {
+  color: var(--muted);
+  font-size: 13px;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+.app-footer a:hover {
+  border-color: var(--muted);
+}
+
+.footer-divider {
+  margin: 0 8px;
+  color: var(--muted);
+}
