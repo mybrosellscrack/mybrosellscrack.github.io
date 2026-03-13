@@ -398,3 +398,8 @@ body {
   margin: 0 8px;
   color: var(--muted);
 }
+
+/* Скрытие элементов */
+.hidden {
+  display: none !important;
+}
