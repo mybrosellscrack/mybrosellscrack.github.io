@@ -678,7 +678,6 @@ renderConfession();
 renderSituations();
 
 // Вызываем при запуске
-updateBackupReminder();
 updateYandexStatus();
 
 // Обработка ручного ввода кода
@@ -694,6 +693,7 @@ document.getElementById("submit-yandex-code")?.addEventListener("click", () => {
   exchangeCodeForToken(code)
     .then(() => {
       backupStatus.textContent = "Яндекс Диск подключён!";
+      if (codeInput) codeInput.value = "";
       updateYandexStatus();
       // Запускаем первый автобэкап
       autoBackupToYandex();
