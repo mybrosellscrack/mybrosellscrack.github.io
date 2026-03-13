@@ -1,4 +1,5 @@
 const STORAGE_KEY = "sj_data_v1";
+const YANDEX_CLIENT_ID = "c705d30899b6423d8932f77e60023d50";
 
 const views = {
   home: document.getElementById("view-home"),
@@ -356,6 +357,9 @@ function addEntry(formData) {
   saveState(state);
   navigate("archive");
   renderArchive();
+  
+  // Автобэкап на Яндекс Диск
+  autoBackupToYandex();
 }
 
 function deleteEntry(id) {
@@ -423,6 +427,9 @@ function saveEdit(formData) {
   renderStats();
   renderConfession();
   renderSituations();
+  
+  // Автобэкап на Яндекс Диск
+  autoBackupToYandex();
 }
 
 function toggleConfessed(weekStart) {
@@ -492,6 +499,11 @@ function exportCsv() {
 
   backupStatus.textContent = "Экспорт завершен.";
   updateBackupReminder(); // Обновляем напоминание
+}
+
+function csvEscape(value) {
+  const escaped = String(value).replaceAll("\"", "\"\"");
+  return `"${escaped}"`;
 }
 
 function csvEscape(value) {
@@ -667,3 +679,151 @@ renderSituations();
 
 // Вызываем при запуске
 updateBackupReminder();
+updateYandexStatus();
+
+// Обработка ручного ввода кода
+document.getElementById("submit-yandex-code")?.addEventListener("click", () => {
+  const codeInput = document.getElementById("yandex-code");
+  const code = codeInput?.value.trim();
+  if (!code) {
+    alert("Введите код");
+    return;
+  }
+  
+  backupStatus.textContent = "Подключение...";
+  exchangeCodeForToken(code)
+    .then(() => {
+      backupStatus.textContent = "Яндекс Диск подключён!";
+      updateYandexStatus();
+      // Запускаем первый автобэкап
+      autoBackupToYandex();
+    })
+    .catch(err => {
+      backupStatus.textContent = "Ошибка: " + err.message;
+    });
+});
+
+// ===== Функции для Яндекс Диска =====
+
+function getYandexToken() {
+  return localStorage.getItem("yandexToken");
+}
+
+function updateYandexStatus() {
+  const statusDiv = document.getElementById("yandex-status");
+  const manualDiv = document.getElementById("yandex-manual");
+  if (!statusDiv) return;
+
+  const token = getYandexToken();
+  if (token) {
+    statusDiv.innerHTML = `
+      <p class="status" style="color: #3aa45c; margin: 8px 0;">
+        ✅ Яндекс Диск подключён. Бэкапы сохраняются автоматически.
+      </p>
+      <button class="btn" id="disconnect-yandex">Отключить</button>
+    `;
+    if (manualDiv) manualDiv.classList.add("hidden");
+    document.getElementById("disconnect-yandex").addEventListener("click", () => {
+      if (confirm("Отключить Яндекс Диск?")) {
+        localStorage.removeItem("yandexToken");
+        updateYandexStatus();
+      }
+    });
+  } else {
+    statusDiv.innerHTML = `
+      <p class="hint" style="margin: 8px 0;">Подключите Яндекс Диск для автоматических бэкапов</p>
+      <button class="btn" id="connect-yandex">Подключить Яндекс Диск</button>
+    `;
+    document.getElementById("connect-yandex").addEventListener("click", () => {
+      if (manualDiv) manualDiv.classList.remove("hidden");
+      const authUrl = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${YANDEX_CLIENT_ID}&redirect_uri=https://oauth.yandex.ru/verification_code&display=page&scope=disk:write`;
+      window.open(authUrl, "_blank", "width=600,height=700");
+    });
+  }
+}
+
+const YANDEX_CLIENT_SECRET = "b7c12e0e9fde4221a863e9e6539da01e";
+
+// Обмен кода на токен
+function exchangeCodeForToken(code) {
+  return fetch("https://oauth.yandex.ru/token", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: `grant_type=authorization_code&code=${code}&client_id=${YANDEX_CLIENT_ID}&client_secret=${YANDEX_CLIENT_SECRET}`
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.access_token) {
+      localStorage.setItem("yandexToken", data.access_token);
+      return data.access_token;
+    } else {
+      throw new Error(data.error_description || "Ошибка получения токена");
+    }
+  });
+}
+
+function uploadToYandexDisk(csvContent, filename) {
+  return new Promise((resolve, reject) => {
+    const token = getYandexToken();
+    if (!token) {
+      reject("Токен не найден");
+      return;
+    }
+
+    const uploadUrl = `https://cloud-api.yandex.net/v1/disk/resources/upload?path=${encodeURIComponent(filename)}&overwrite=true`;
+    
+    fetch(uploadUrl, {
+      method: "GET",
+      headers: { "Authorization": `OAuth ${token}` }
+    })
+    .then(response => response.json())
+    .then(uploadInfo => {
+      return fetch(uploadInfo.href, {
+        method: "PUT",
+        headers: { "Content-Type": "text/csv; charset=utf-8" },
+        body: csvContent
+      });
+    })
+    .then(response => {
+      if (response.ok) {
+        resolve("Сохранено на Яндекс Диск");
+      } else {
+        reject("Ошибка загрузки");
+      }
+    })
+    .catch(error => reject(error));
+  });
+}
+
+function autoBackupToYandex() {
+  const token = getYandexToken();
+  if (!token) return;
+
+  const state = loadState();
+  if (state.entries.length === 0) return;
+
+  const lines = ["date;situation;context;consequence;insight;type;week_confessed_at"];
+  state.entries.forEach((entry) => {
+    const weekStart = weekStartFromEntry(entry.date);
+    const confessedAt = state.confessed[weekStart] || "";
+    const row = [
+      entry.date,
+      entry.situation,
+      entry.context || "",
+      entry.consequence,
+      entry.insight,
+      entry.type || "sin",
+      confessedAt,
+    ].map(csvEscape).join(";");
+    lines.push(row);
+  });
+  
+  const csv = lines.join("\n");
+  const filename = "spiritual-journal-backup-" + formatDateOnly(new Date()) + ".csv";
+  
+  uploadToYandexDisk(csv, filename)
+    .then(() => console.log("✅ Автобэкап на Яндекс Диск выполнен"))
+    .catch(err => console.log("Ошибка автобэкапа:", err));
+}

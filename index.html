@@ -128,6 +128,12 @@
             <h2>Резерв / Восстановление</h2>
           </div>
           <p class="hint">Экспорт сохраняет CSV-файл. Импорт заменяет текущие данные из файла.</p>
+          <div id="yandex-status"></div>
+          <div id="yandex-manual" class="hidden" style="margin: 12px 0;">
+            <p class="hint">Введите код с сайта Яндекса:</p>
+            <input type="text" id="yandex-code" placeholder="Код из URL (после code=)" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc; margin-bottom: 8px;">
+            <button class="btn primary" id="submit-yandex-code">Подтвердить</button>
+          </div>
           <div class="backup-actions">
             <button class="btn primary" id="export-csv">Экспорт CSV</button>
             <label class="btn">
