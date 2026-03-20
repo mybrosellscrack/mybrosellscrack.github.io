@@ -1,4 +1,5 @@
 const STORAGE_KEY = "sj_data_v1";
+const INDEX_STORAGE_KEY = "sj_index_v1";
 const YANDEX_CLIENT_ID = "c705d30899b6423d8932f77e60023d50";
 
 const views = {
@@ -8,6 +9,7 @@ const views = {
   confession: document.getElementById("view-confession"),
   stats: document.getElementById("view-stats"),
   situations: document.getElementById("view-situations"),
+  index: document.getElementById("view-index"),
   backup: document.getElementById("view-backup"),
 };
 
@@ -20,6 +22,73 @@ const statsEmpty = document.getElementById("stats-empty");
 const situationsList = document.getElementById("situations-list");
 const situationsEmpty = document.getElementById("situations-empty");
 const backupStatus = document.getElementById("backup-status");
+const indexLastUpdated = document.getElementById("index-last-updated");
+const INDEX_BLOCKS = ["F", "W", "D"];
+const indexQuizForm = document.getElementById("index-quiz-form");
+const indexQuestionsContainer = document.getElementById("index-questions");
+const indexStatusMessage = document.getElementById("index-save-status");
+const indexHistoryList = document.getElementById("index-history-list");
+const indexHistoryEmpty = document.getElementById("index-history-empty");
+const indexHistorySummary = document.getElementById("index-history-summary");
+const indexHistorySummaryEmpty = document.getElementById("index-history-summary-empty");
+
+const INDEX_OPTION_LABELS = {
+  positive: [
+    "0 — Почти всегда / Всегда",
+    "1 — Часто",
+    "2 — Редко",
+    "3 — Почти никогда / Никогда",
+  ],
+  negative: [
+    "0 — Никогда / Совсем нет",
+    "1 — Редко",
+    "2 — Часто",
+    "3 — Постоянно / Всегда",
+  ],
+};
+
+const INDEX_QUESTIONS = [
+  { id: "F1", block: "F", text: "Я часто ощущаю внутренний мир и покой.", polarity: "positive" },
+  { id: "F2", block: "F", text: "Меня мучает обида на кого-то из прошлого.", polarity: "negative" },
+  { id: "F3", block: "F", text: "Я замечаю за собой раздражение по мелочам.", polarity: "negative" },
+  { id: "F4", block: "F", text: "Я испытываю благодарность Богу за прожитый день.", polarity: "positive" },
+  { id: "F5", block: "F", text: "Меня посещает уныние или тоска.", polarity: "negative" },
+  { id: "F6", block: "F", text: "Я способен искренне радоваться успехам других.", polarity: "positive" },
+  { id: "F7", block: "F", text: "Я тревожусь о будущем, здоровье и близких.", polarity: "negative" },
+  { id: "F8", block: "F", text: "Моё сердце откликается на молитву и Писание.", polarity: "positive" },
+  { id: "F9", block: "F", text: "Я помню обиды и не могу их простить.", polarity: "negative" },
+  { id: "F10", block: "F", text: "Я чувствую, что Бог меня слышит.", polarity: "positive" },
+  { id: "W1", block: "W", text: "Я легко принимаю важные решения, не колеблясь.", polarity: "positive" },
+  { id: "W2", block: "W", text: "Я довожу до конца начатые дела (включая молитвенное правило).", polarity: "positive" },
+  { id: "W3", block: "W", text: "Мне трудно сказать «нет» своим прихотям (еда, развлечения).", polarity: "negative" },
+  { id: "W4", block: "W", text: "Когда нужно сделать скучное или трудное дело, я откладываю его.", polarity: "negative" },
+  { id: "W5", block: "W", text: "Я способен заставить себя молиться, даже когда нет желания.", polarity: "positive" },
+  { id: "W6", block: "W", text: "Если я решил не грешить в чём-то, я держусь твёрдо.", polarity: "positive" },
+  { id: "W7", block: "W", text: "В трудных обстоятельствах я скорее мобилизуюсь, чем опускаю руки.", polarity: "positive" },
+  { id: "W8", block: "W", text: "Я легко поддаюсь чужому влиянию и могу отказаться от доброго намерения.", polarity: "negative" },
+  { id: "W9", block: "W", text: "Я соблюдаю посты и дисциплинарные правила Церкви.", polarity: "positive" },
+  { id: "W10", block: "W", text: "Мне не хватает силы воли бороться с привычными грехами.", polarity: "negative" },
+  { id: "D1", block: "D", text: "Я часто мечтаю о богатстве, славе, красивой жизни.", polarity: "negative" },
+  { id: "D2", block: "D", text: "Меня влечёт к плотским помыслам и запретным удовольствиям.", polarity: "negative" },
+  { id: "D3", block: "D", text: "Я испытываю искреннее желание молиться.", polarity: "positive" },
+  { id: "D4", block: "D", text: "Мне интересно читать духовные книги и узнавать о вере.", polarity: "positive" },
+  { id: "D5", block: "D", text: "Я хочу помогать другим, даже если это неудобно.", polarity: "positive" },
+  { id: "D6", block: "D", text: "Мои мысли часто заняты земными заботами, а не Богом.", polarity: "negative" },
+  { id: "D7", block: "D", text: "Я испытываю жажду исповеди и очищения совести.", polarity: "positive" },
+  { id: "D8", block: "D", text: "Мне хочется уединиться и побыть с Богом в тишине.", polarity: "positive" },
+  { id: "D9", block: "D", text: "Я привязан к вещам, еде и комфорту, трудно отказаться.", polarity: "negative" },
+  { id: "D10", block: "D", text: "Мои желания направлены к добру и чистоте.", polarity: "positive" },
+];
+const MAX_INDEX_HISTORY = 60;
+const INDEX_BLOCK_LABELS = { F: "Чувства", W: "Воля", D: "Желания" };
+
+function buildDefaultIndexResponses() {
+  const responses = {};
+  INDEX_QUESTIONS.forEach((question) => {
+    responses[question.id] = 0;
+  });
+  return responses;
+}
 
 const editModal = document.getElementById("edit-modal");
 const editForm = document.getElementById("edit-entry-form");
@@ -27,6 +96,7 @@ const editCancel = document.getElementById("edit-cancel");
 
 let editingId = null;
 let currentEntryType = "sin"; // 'sin' или 'situation'
+let indexState = loadIndexState();
 
 let toggleSin, toggleSituation;
 
@@ -57,21 +127,261 @@ document.addEventListener("DOMContentLoaded", initToggleButtons);
 function loadState() {
   const raw = localStorage.getItem(STORAGE_KEY);
   if (!raw) {
-    return { entries: [], confessed: {} };
+    return { entries: [], confessed: {}, indexHistory: [] };
   }
   try {
     const parsed = JSON.parse(raw);
     return {
       entries: Array.isArray(parsed.entries) ? parsed.entries : [],
       confessed: parsed.confessed && typeof parsed.confessed === "object" ? parsed.confessed : {},
+      indexHistory: Array.isArray(parsed.indexHistory) ? parsed.indexHistory : [],
     };
   } catch (err) {
-    return { entries: [], confessed: {} };
+    return { entries: [], confessed: {}, indexHistory: [] };
   }
 }
 
 function saveState(state) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
+const INDEX_LEVELS = [
+  { key: "green", min: 0, max: 7, label: "Зелёный", description: "В этой сфере всё гармонично." },
+  { key: "yellow", min: 8, max: 15, label: "Жёлтый", description: "Умеренные трудности, нужно внимание." },
+  { key: "orange", min: 16, max: 23, label: "Оранжевый", description: "Выраженные проблемы, стоит обратиться за поддержкой." },
+  { key: "red", min: 24, max: 30, label: "Красный", description: "Тяжёлое состояние, требуется решительная работа." },
+];
+
+const INDEX_STATUS_TEXTS = {
+  F: {
+    green: "Ваше сердце в мире, вы способны к благодарности и прощению. Так держать!",
+    yellow: "Тревога и раздражение заметны, уделите внимание молитве о мире.",
+    orange: "Чувства напряжены, стоит поговорить с духовником и усилить молчание.",
+    red: "Сердце в кризисе — нужна исповедь, аскеза и помощь духовного наставника.",
+  },
+  W: {
+    green: "Вы легко принимаете решения и доводите дела до конца.",
+    yellow: "Вам бывает трудно держаться курса, попросите Бога о твёрдости.",
+    orange: "Сила воли ослабла, важно вернуть дисциплину через малые послушания.",
+    red: "Воля почти отсутствует, нужная системная духовная работа и поддержка.",
+  },
+  D: {
+    green: "Стремления направлены к Богу, желания чисты.",
+    yellow: "Земные притяжения слышны, усилите пост и душевное внимание.",
+    orange: "Привязанность к плотским помыслам сильна, нужна очищающая исповедь.",
+    red: "Плотские помыслы переполняют, необходима интенсивная духовная помощь.",
+  },
+};
+
+function loadIndexState() {
+  const defaultResponses = buildDefaultIndexResponses();
+  const raw = localStorage.getItem(INDEX_STORAGE_KEY);
+  if (!raw) {
+    return { scores: { F: 0, W: 0, D: 0 }, lastUpdated: "", responses: defaultResponses };
+  }
+  try {
+    const parsed = JSON.parse(raw);
+    const responses = { ...defaultResponses, ...(parsed?.responses || {}) };
+    const scores = {};
+    INDEX_BLOCKS.forEach((block) => {
+      const value = Number(parsed?.scores?.[block]);
+      scores[block] = Number.isFinite(value) ? Math.max(0, Math.min(30, value)) : 0;
+    });
+    return {
+      scores,
+      lastUpdated: parsed?.lastUpdated || "",
+      responses,
+    };
+  } catch (err) {
+    return { scores: { F: 0, W: 0, D: 0 }, lastUpdated: "", responses: defaultResponses };
+  }
+}
+
+function saveIndexState(state) {
+  localStorage.setItem(INDEX_STORAGE_KEY, JSON.stringify(state));
+}
+
+function getLevelForScore(score) {
+  return INDEX_LEVELS.find((level) => score >= level.min && score <= level.max) || INDEX_LEVELS[INDEX_LEVELS.length - 1];
+}
+
+function updateIndexBlock(block) {
+  const blockEl = document.querySelector(`.index-block[data-block="${block}"]`);
+  if (!blockEl) return;
+  const score = indexState.scores[block] ?? 0;
+  const level = getLevelForScore(score);
+  blockEl.dataset.level = level.key;
+  const scoreEl = blockEl.querySelector("[data-score]");
+  if (scoreEl) {
+    scoreEl.textContent = `${score} / 30`;
+  }
+  const statusText = resolveIndexStatusText(block, level);
+  const statusEl = blockEl.querySelector("[data-status]");
+  if (statusEl) {
+    statusEl.textContent = `${level.label} — ${statusText}`;
+  }
+}
+
+function resolveIndexStatusText(block, level) {
+  const blockTexts = INDEX_STATUS_TEXTS[block] || {};
+  return blockTexts[level.key] || level.description || "Состояние требует внимания.";
+}
+
+function updateIndexTimestamp() {
+  if (!indexLastUpdated) return;
+  if (indexState.lastUpdated) {
+    indexLastUpdated.textContent = `Последнее обновление: ${indexState.lastUpdated}`;
+  } else {
+    indexLastUpdated.textContent = "Результаты ещё не фиксировались.";
+  }
+}
+
+function updateIndexScoresFromResponses() {
+  const scores = { F: 0, W: 0, D: 0 };
+  INDEX_QUESTIONS.forEach((question) => {
+    const rawValue = Number(indexState.responses?.[question.id]);
+    const value = Number.isFinite(rawValue) ? rawValue : 0;
+    scores[question.block] += value;
+  });
+  indexState.scores = scores;
+  return scores;
+}
+
+function renderIndexSummary() {
+  INDEX_BLOCKS.forEach((block) => updateIndexBlock(block));
+  updateIndexTimestamp();
+}
+
+function renderIndexQuestions() {
+  if (!indexQuestionsContainer) return;
+  indexQuestionsContainer.innerHTML = "";
+  INDEX_QUESTIONS.forEach((question) => {
+    const questionWrapper = document.createElement("div");
+    questionWrapper.className = "index-question";
+    const savedValue = String(indexState.responses?.[question.id] ?? 0);
+    const labels = INDEX_OPTION_LABELS[question.polarity] || INDEX_OPTION_LABELS.negative;
+    const optionsMarkup = labels
+      .map((label, idx) => {
+        const checked = savedValue === String(idx) ? "checked" : "";
+        return `<label class="index-option"><input type="radio" name="${question.id}" value="${idx}" data-question="${question.id}" ${checked} /><span>${label}</span></label>`;
+      })
+      .join("");
+    questionWrapper.innerHTML = `
+      <div class="index-question-header">
+        <span class="index-question-text">${question.id} — ${question.text}</span>
+        <span class="index-question-block">${INDEX_BLOCK_LABELS[question.block] || question.block}</span>
+      </div>
+      <div class="index-option-group">${optionsMarkup}</div>
+    `;
+    indexQuestionsContainer.appendChild(questionWrapper);
+  });
+  updateIndexScoresFromResponses();
+  renderIndexSummary();
+}
+
+function handleQuestionChange(questionId, value) {
+  if (!questionId) return;
+  indexState.responses = {
+    ...indexState.responses,
+    [questionId]: value,
+  };
+  updateIndexScoresFromResponses();
+  saveIndexState(indexState);
+  renderIndexSummary();
+}
+
+function renderIndexHistory() {
+  if (!indexHistoryList) return;
+  const state = loadState();
+  const history = Array.isArray(state.indexHistory) ? state.indexHistory : [];
+  const entries = history.slice(-6).reverse();
+  indexHistoryList.innerHTML = "";
+  if (indexHistoryEmpty) {
+    indexHistoryEmpty.style.display = entries.length === 0 ? "block" : "none";
+  }
+  if (entries.length === 0) {
+    return;
+  }
+  entries.forEach((entry) => {
+    const scoreBlocks = INDEX_BLOCKS.map((block) => {
+      const score = entry.scores?.[block] ?? 0;
+      const level = getLevelForScore(score);
+      return `<div class="index-history-score">
+        <strong>${INDEX_BLOCK_LABELS[block] || block}</strong>
+        <span>${score} / 30 · ${level.label}</span>
+      </div>`;
+    }).join("");
+    const card = document.createElement("div");
+    card.className = "index-history-card";
+    card.innerHTML = `
+      <div class="index-history-top">
+        <strong>${entry.date}</strong>
+      </div>
+      <div class="index-history-scores">${scoreBlocks}</div>
+    `;
+    indexHistoryList.appendChild(card);
+  });
+}
+
+function renderIndexProgressSummary(history) {
+  if (!indexHistorySummary) return;
+  const entries = (history || []).slice(-4).reverse();
+  indexHistorySummary.innerHTML = "";
+  if (indexHistorySummaryEmpty) {
+    indexHistorySummaryEmpty.style.display = entries.length === 0 ? "block" : "none";
+  }
+  if (entries.length === 0) {
+    return;
+  }
+  entries.forEach((entry) => {
+    const row = document.createElement("div");
+    row.className = "index-progress-row";
+    const dateSpan = document.createElement("span");
+    dateSpan.className = "index-progress-date";
+    dateSpan.textContent = entry.date;
+    row.appendChild(dateSpan);
+    INDEX_BLOCKS.forEach((block) => {
+      const score = entry.scores?.[block] ?? 0;
+      const level = getLevelForScore(score);
+      const chip = document.createElement("span");
+      chip.className = `index-progress-chip level-${level.key}`;
+      chip.textContent = `${INDEX_BLOCK_LABELS[block] || block}: ${score} (${level.label})`;
+      row.appendChild(chip);
+    });
+    indexHistorySummary.appendChild(row);
+  });
+}
+
+function renderIndex() {
+  renderIndexSummary();
+  renderIndexHistory();
+}
+
+function saveIndexResult(event) {
+  event.preventDefault();
+  updateIndexScoresFromResponses();
+  const snapshot = {
+    id: `i_${Date.now()}`,
+    date: nowString(),
+    scores: { ...indexState.scores },
+    responses: { ...indexState.responses },
+  };
+  const state = loadState();
+  const history = Array.isArray(state.indexHistory) ? state.indexHistory : [];
+  history.push(snapshot);
+  if (history.length > MAX_INDEX_HISTORY) {
+    history.splice(0, history.length - MAX_INDEX_HISTORY);
+  }
+  state.indexHistory = history;
+  saveState(state);
+  indexState.lastUpdated = snapshot.date;
+  saveIndexState(indexState);
+  renderIndexSummary();
+  renderIndexHistory();
+  renderStats();
+  if (indexStatusMessage) {
+    indexStatusMessage.textContent = `Результат сохранён: ${snapshot.date}`;
+  }
 }
 
 function nowString() {
@@ -188,19 +498,19 @@ function renderStats() {
   statsList.innerHTML = "";
   if (items.length === 0) {
     statsEmpty.style.display = "block";
-    return;
+  } else {
+    statsEmpty.style.display = "none";
+    items.forEach(([label, value]) => {
+      const row = document.createElement("div");
+      row.className = "stat-row";
+      row.innerHTML = `
+        <span>${escapeHtml(label)}</span>
+        <strong>${value}</strong>
+      `;
+      statsList.appendChild(row);
+    });
   }
-  statsEmpty.style.display = "none";
-
-  items.forEach(([label, value]) => {
-    const row = document.createElement("div");
-    row.className = "stat-row";
-    row.innerHTML = `
-      <span>${escapeHtml(label)}</span>
-      <strong>${value}</strong>
-    `;
-    statsList.appendChild(row);
-  });
+  renderIndexProgressSummary(state.indexHistory);
 }
 
 function renderConfession() {
@@ -447,7 +757,7 @@ function resetData() {
   if (!confirm("Сбросить все данные? Это действие нельзя отменить.")) {
     return;
   }
-  saveState({ entries: [], confessed: {} });
+  saveState({ entries: [], confessed: {}, indexHistory: [] });
   renderArchive();
   renderStats();
   renderConfession();
@@ -506,11 +816,6 @@ function csvEscape(value) {
   return `"${escaped}"`;
 }
 
-function csvEscape(value) {
-  const escaped = String(value).replaceAll("\"", "\"\"");
-  return `"${escaped}"`;
-}
-
 function updateBackupReminder() {
   const reminder = document.getElementById("backup-reminder");
   if (!reminder) return;
@@ -546,7 +851,13 @@ function importCsv(file) {
     if (!confirm("Импорт заменит текущие данные. Продолжить?")) {
       return;
     }
-    saveState(parsed);
+    const current = loadState();
+    const merged = {
+      entries: parsed.entries,
+      confessed: parsed.confessed,
+      indexHistory: current.indexHistory,
+    };
+    saveState(merged);
     renderArchive();
     renderStats();
     renderConfession();
@@ -631,9 +942,25 @@ document.querySelectorAll("[data-nav]").forEach((btn) => {
     if (target === "backup") {
       backupStatus.textContent = "";
     }
+    if (target === "index") {
+      renderIndex();
+    }
     navigate(target);
   });
 });
+
+if (indexQuestionsContainer) {
+  indexQuestionsContainer.addEventListener("change", (event) => {
+    const target = event.target;
+    if (!target || !target.dataset) return;
+    const questionId = target.dataset.question;
+    if (!questionId) return;
+    const value = Number(target.value);
+    handleQuestionChange(questionId, Number.isFinite(value) ? value : 0);
+  });
+}
+
+indexQuizForm?.addEventListener("submit", saveIndexResult);
 
 document.getElementById("new-entry-form").addEventListener("submit", (event) => {
   event.preventDefault();
@@ -672,10 +999,16 @@ document.getElementById("import-csv").addEventListener("change", (event) => {
   event.target.value = "";
 });
 
+renderIndexQuestions();
+if (indexStatusMessage) {
+  indexStatusMessage.textContent = "";
+}
+
 renderArchive();
 renderStats();
 renderConfession();
 renderSituations();
+renderIndex();
 
 // Вызываем при запуске
 updateYandexStatus();

@@ -24,6 +24,7 @@
           </p>
           <div class="menu-grid">
             <button class="btn primary" data-nav="new">Новая запись</button>
+            <button class="btn" data-nav="index">Индекс душевного здоровья</button>
             <button class="btn" data-nav="confession">Подготовка к исповеди</button>
             <button class="btn" data-nav="situations">Ситуации</button>
             <button class="btn" data-nav="stats">Статистика слабостей</button>
@@ -108,6 +109,80 @@
         </div>
       </section>
 
+      <section id="view-index" class="view">
+        <div class="card">
+          <div class="view-header">
+            <button class="btn ghost" data-nav="home">Домой</button>
+            <h2>Индекс душевного здоровья</h2>
+          </div>
+          <p class="hint">
+            Триединая шкала (Чувства, Воля, Желания) помогает диагностировать душевное состояние. Пройдите тест из 30 вопросов (по 10 на блок), а система автоматически подсчитает баллы и покажет интерпретацию.
+          </p>
+          <div class="index-summary">
+            <p>
+              Ниже — краткая сводка по каждой шкале и расшифровка уровня (цвет, комментарий). После прохождения теста нажмите «Сохранить результат» — баллы попадут в статистику прогресса.
+            </p>
+            <p>
+              Сохраняйте измерения почаще: приложение хранит историю и показывает, как изменяются баллы в каждой сфере. Дата последнего замера всегда видна внизу блока.
+            </p>
+          </div>
+          <div class="index-grid">
+            <article class="index-block" data-block="F">
+              <div class="index-head">
+                <div>
+                  <div class="index-pin">F</div>
+                  <div class="index-title">Чувства</div>
+                </div>
+                <div class="index-score" data-score>0 / 30</div>
+              </div>
+              <p class="index-description">Эмоциональный фон, благодарность, способность к прощению. Высокие баллы говорят о тревоге, унынии или обидчивости.</p>
+              <div class="index-status" data-status></div>
+            </article>
+            <article class="index-block" data-block="W">
+              <div class="index-head">
+                <div>
+                  <div class="index-pin">W</div>
+                  <div class="index-title">Воля</div>
+                </div>
+                <div class="index-score" data-score>0 / 30</div>
+              </div>
+              <p class="index-description">Решимость, дисциплина, способность делать нужное даже без желания. Высокие баллы — слабая воля или подверженность прихотям.</p>
+              <div class="index-status" data-status></div>
+            </article>
+            <article class="index-block" data-block="D">
+              <div class="index-head">
+                <div>
+                  <div class="index-pin">D</div>
+                  <div class="index-title">Желания</div>
+                </div>
+                <div class="index-score" data-score>0 / 30</div>
+              </div>
+              <p class="index-description">Направленность стремлений: к Богу или к плотским притяжениям. Высокие баллы говорят о привязанности к греховным помыслам.</p>
+              <div class="index-status" data-status></div>
+            </article>
+          </div>
+          <form id="index-quiz-form" class="index-quiz">
+            <div id="index-questions" class="index-questions"></div>
+            <div class="index-quiz-actions">
+              <button type="submit" class="btn primary">Сохранить результат</button>
+              <p id="index-save-status" class="index-note"></p>
+            </div>
+          </form>
+          <div class="index-history">
+            <div class="index-history-header">
+              <h3>История замеров</h3>
+              <p class="index-note">Последние результаты используются для отслеживания прогресса и отображаются в статистике.</p>
+            </div>
+            <div id="index-history-list" class="index-history-list"></div>
+            <p id="index-history-empty" class="empty">Результатов пока нет.</p>
+          </div>
+          <div class="index-footer">
+            <p id="index-last-updated" class="index-note">Результаты ещё не фиксировались.</p>
+            <p class="index-note">Уровни: 0–7 Зелёный (гармония), 8–15 Жёлтый (следует быть внимательнее), 16–23 Оранжевый (нужна помощь духовника), 24–30 Красный (необходима решительная работа над собой).</p>
+          </div>
+        </div>
+      </section>
+
       <section id="view-stats" class="view">
         <div class="card">
           <div class="view-header">
@@ -117,6 +192,8 @@
           <p class="hint">Сводка по повторяющимся грехам — вашим духовным слабостям.</p>
           <div id="stats-list" class="list"></div>
           <p id="stats-empty" class="empty">Данных пока нет.</p>
+          <div id="index-history-summary" class="index-progress-summary"></div>
+          <p id="index-history-summary-empty" class="empty">Нет измерений.</p>
         </div>
       </section>
 
