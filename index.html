@@ -3,128 +3,50 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Духовный дневник</title>
+    <title>Духовный дневник — Блог и Индекс</title>
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="blog.css" />
   </head>
   <body>
     <header class="app-header">
-      <div class="brand">
-        <div class="title">Духовный дневник</div>
-        <div class="subtitle">Веб-приложение</div>
+      <div class="header-inner">
+        <div class="brand">
+          <div class="brand-title">Духовный дневник</div>
+          <div class="brand-subtitle">Блог и Индекс душевного здоровья</div>
+        </div>
+        <nav class="nav-bar">
+          <button class="nav-tab active" data-target="blog">Блог</button>
+          <button class="nav-tab" data-target="index">Индекс душевного здоровья</button>
+          <span class="nav-indicator"></span>
+        </nav>
       </div>
     </header>
 
     <main class="app-main">
-      <section id="view-home" class="view active">
-        <div class="card menu-card">
-          <h2>Главное меню</h2>
-          <button class="btn ghost" id="help-btn" style="margin-bottom: 16px;">❓ Как пользоваться приложением</button>
-          <p class="notice">
-            Важно: раз в неделю делайте экспорт данных, чтобы иметь резервную копию. Либо подключите свой Яндекс.Диск для автоматических бэкапов.
-          </p>
-          <div class="menu-grid">
-            <button class="btn primary" data-nav="new">Новая запись</button>
-            <button class="btn" data-nav="index">Индекс душевного здоровья</button>
-            <button class="btn" data-nav="confession">Подготовка к исповеди</button>
-            <button class="btn" data-nav="situations">Ситуации</button>
-            <button class="btn" data-nav="stats">Статистика слабостей</button>
-            <button class="btn" data-nav="archive">Архив</button>
-            <button class="btn" data-nav="backup">Резерв / Восстановление</button>
-            <button class="btn danger" id="reset-data">Сбросить данные</button>
-          </div>
-        </div>
-      </section>
-
-      <section id="view-new" class="view">
+      <!-- Секция Блога (список статей) -->
+      <section id="view-blog" class="view active">
         <div class="card">
-          <div class="view-header">
-            <button class="btn ghost" data-nav="home">Домой</button>
-            <h2>Новая запись</h2>
-          </div>
-          <p class="hint">Выберите тип записи: "Грех" — для подготовки к исповеди или "Ситуация" — для анализа жизненных событий. Заполните обязательные поля. Записи хранятся локально в вашем браузере.</p>
-          <div class="form-group">
-            <label>
-              Тип записи
-              <div class="toggle-group">
-                <button type="button" class="btn-toggle active" data-type="sin">Грех</button>
-                <button type="button" class="btn-toggle" data-type="situation">Ситуация</button>
-              </div>
-            </label>
-          </div>
-          <form id="new-entry-form" class="form">
-            <label>
-              Ситуация (обязательно)
-              <input type="text" name="situation" required />
-            </label>
-            <label>
-              Контекст (необязательно)
-              <textarea name="context" rows="2"></textarea>
-            </label>
-            <label>
-              Последствие (обязательно)
-              <textarea name="consequence" rows="2" required></textarea>
-            </label>
-            <label>
-              Инсайт (обязательно)
-              <textarea name="insight" rows="2" required></textarea>
-            </label>
-            <button type="submit" class="btn primary">Сохранить</button>
-          </form>
+          <h2>Блог статей</h2>
+          <p class="hint">Размышления о духовной жизни, антропологии и психологии</p>
+          <div id="blog-list" class="blog-list"></div>
+          <p id="blog-empty" class="empty">Статьи загружаются…</p>
         </div>
       </section>
 
-      <section id="view-archive" class="view">
-        <div class="card">
-          <div class="view-header">
-            <button class="btn ghost" data-nav="home">Домой</button>
-            <h2>Архив</h2>
-          </div>
-          <p class="hint">Здесь все записи. Можно редактировать и удалять. Данные не отправляются на сервер.</p>
-          <div id="archive-list" class="list"></div>
-          <p id="archive-empty" class="empty">Записей пока нет.</p>
-        </div>
-      </section>
-
-      <section id="view-confession" class="view">
-        <div class="card">
-          <div class="view-header">
-            <button class="btn ghost" data-nav="home">Домой</button>
-            <h2>Подготовка к исповеди</h2>
-          </div>
-          <p class="hint">Записи сгруппированы по неделям. Отметьте неделю как исповеданную — через 3 дня она скрывается из списка.</p>
-          <div id="confession-list" class="list"></div>
-          <p id="confession-empty" class="empty">Нет недель для отображения.</p>
-        </div>
-      </section>
-
-      <section id="view-situations" class="view">
-        <div class="card">
-          <div class="view-header">
-            <button class="btn ghost" data-nav="home">Домой</button>
-            <h2>Ситуации</h2>
-          </div>
-          <p class="hint">Здесь отображаются все записи типа "Ситуация". Они не попадают в подготовку к исповеди.</p>
-          <div id="situations-list" class="list"></div>
-          <p id="situations-empty" class="empty">Записей пока нет.</p>
-        </div>
-      </section>
-
+      <!-- Секция Индекса душевного здоровья (переработанный тест) -->
       <section id="view-index" class="view">
         <div class="card">
           <div class="view-header">
-            <button class="btn ghost" data-nav="home">Домой</button>
             <h2>Индекс душевного здоровья</h2>
+          </div>
+          <div class="notice" style="background:#fff3cd;border-left:4px solid #ffc107;color:#856404;">
+            <strong>⚠️ Важно:</strong> Все данные теста хранятся только в локальном хранилище вашего браузера (localStorage). Никакие данные не передаются на сервер. При очистке кэша результаты будут потеряны.
           </div>
           <p class="hint">
             Триединая шкала (Чувства, Воля, Желания) помогает диагностировать душевное состояние. Пройдите тест из 30 вопросов (по 10 на блок), а система автоматически подсчитает баллы и покажет интерпретацию.
           </p>
           <div class="index-summary">
-            <p>
-              Ниже — краткая сводка по каждой шкале и расшифровка уровня (цвет, комментарий). После прохождения теста нажмите «Сохранить результат» — баллы попадут в статистику прогресса.
-            </p>
-            <p>
-              Сохраняйте измерения почаще: приложение хранит историю и показывает, как изменяются баллы в каждой сфере. Дата последнего замера всегда видна внизу блока.
-            </p>
+            <p>После прохождения теста нажмите «Сохранить результат» — баллы сохранятся локально. Дата последнего замера всегда видна внизу блока.</p>
           </div>
           <div class="index-grid">
             <article class="index-block" data-block="F">
@@ -135,7 +57,7 @@
                 </div>
                 <div class="index-score" data-score>0 / 30</div>
               </div>
-              <p class="index-description">Эмоциональный фон, благодарность, способность к прощению. Высокие баллы говорят о тревоге, унынии или обидчивости.</p>
+              <p class="index-description">Эмоциональный фон, благодарность, способность к прощению.</p>
               <div class="index-status" data-status></div>
             </article>
             <article class="index-block" data-block="W">
@@ -146,7 +68,7 @@
                 </div>
                 <div class="index-score" data-score>0 / 30</div>
               </div>
-              <p class="index-description">Решимость, дисциплина, способность делать нужное даже без желания. Высокие баллы — слабая воля или подверженность прихотям.</p>
+              <p class="index-description">Решимость, дисциплина, способность делать нужное.</p>
               <div class="index-status" data-status></div>
             </article>
             <article class="index-block" data-block="D">
@@ -157,7 +79,7 @@
                 </div>
                 <div class="index-score" data-score>0 / 30</div>
               </div>
-              <p class="index-description">Направленность стремлений: к Богу или к плотским притяжениям. Высокие баллы говорят о привязанности к греховным помыслам.</p>
+              <p class="index-description">Направленность стремлений: к Богу или к плотским притяжениям.</p>
               <div class="index-status" data-status></div>
             </article>
           </div>
@@ -171,7 +93,6 @@
           <div class="index-history">
             <div class="index-history-header">
               <h3>История замеров</h3>
-              <p class="index-note">Последние результаты используются для отслеживания прогресса и отображаются в статистике.</p>
             </div>
             <div id="index-history-list" class="index-history-list"></div>
             <p id="index-history-empty" class="empty">Результатов пока нет.</p>
@@ -182,92 +103,7 @@
           </div>
         </div>
       </section>
-
-      <section id="view-stats" class="view">
-        <div class="card">
-          <div class="view-header">
-            <button class="btn ghost" data-nav="home">Домой</button>
-            <h2>Статистика слабостей</h2>
-          </div>
-          <p class="hint">Сводка по повторяющимся грехам — вашим духовным слабостям.</p>
-          <div id="stats-list" class="list"></div>
-          <p id="stats-empty" class="empty">Данных пока нет.</p>
-          <div id="index-history-summary" class="index-progress-summary"></div>
-          <p id="index-history-summary-empty" class="empty">Нет измерений.</p>
-        </div>
-      </section>
-
-      <section id="view-backup" class="view">
-        <div class="card">
-          <div class="view-header">
-            <button class="btn ghost" data-nav="home">Домой</button>
-            <h2>Резерв / Восстановление</h2>
-          </div>
-          <p class="hint">Экспорт сохраняет CSV-файл. Импорт заменяет текущие данные из файла.</p>
-          <div id="yandex-status"></div>
-          <div class="backup-actions">
-            <button class="btn primary" id="export-csv">Экспорт CSV</button>
-            <label class="btn">
-              Импорт CSV
-              <input type="file" id="import-csv" accept=".csv,text/csv,text/plain" />
-            </label>
-            <p id="backup-status" class="status"></p>
-          </div>
-          <div id="yandex-manual" class="hidden" style="margin-top: 16px; padding: 12px; background: rgba(58, 95, 111, 0.06); border-radius: 10px;">
-            <p class="hint" style="margin-top: 0;">Введите код с сайта Яндекса:</p>
-            <input type="text" id="yandex-code" placeholder="Код из URL (после code=)" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc; margin-bottom: 8px;">
-            <button class="btn primary" id="submit-yandex-code">Подтвердить</button>
-          </div>
-        </div>
-      </section>
-
-      <!-- Модальное окно справки -->
-      <div id="help-modal" class="modal hidden" role="dialog" aria-modal="true">
-        <div class="modal-content">
-          <h3>📖 Как пользоваться приложением</h3>
-          <div class="help-content">
-            <p><strong>Новая запись</strong> — добавьте запись о грехе или жизненной ситуации. Заполните обязательные поля: ситуация, последствие, инсайт. Контекст необязателен.</p>
-            <p><strong>Архив</strong> — просмотр всех записей. Можно редактировать и удалять записи.</p>
-            <p><strong>Подготовка к исповеди</strong> — записи сгруппированы по неделям. Отметьте неделю как исповеданную — через 3 дня она скроется из списка.</p>
-            <p><strong>Ситуации</strong> — отдельный раздел для анализа жизненных событий (не грехи). Не попадают в подготовку к исповеди.</p>
-            <p><strong>Статистика слабостей</strong> — показывает, какие грехи повторяются чаще всего.</p>
-            <p><strong>Резерв / Восстановление</strong> — экспорт данных в CSV-файл и импорт из резервной копии. Данные хранятся только в браузере!</p>
-            <p class="notice" style="background: #fff3cd; color: #856404; padding: 10px; border-radius: 4px;"><strong>Важно:</strong> делайте бэкап раз в неделю. Данные хранятся локально в браузере и могут быть потеряны при очистке.</p>
-          </div>
-          <div class="modal-actions">
-            <button type="button" class="btn primary" id="help-close">Понятно</button>
-          </div>
-        </div>
-      </div>
     </main>
-
-    <div id="edit-modal" class="modal hidden" role="dialog" aria-modal="true">
-      <div class="modal-content">
-        <h3>Редактировать запись</h3>
-        <form id="edit-entry-form" class="form">
-          <label>
-            Ситуация (обязательно)
-            <input type="text" name="situation" required />
-          </label>
-          <label>
-            Контекст (необязательно)
-            <textarea name="context" rows="2"></textarea>
-          </label>
-          <label>
-            Последствие (обязательно)
-            <textarea name="consequence" rows="2" required></textarea>
-          </label>
-          <label>
-            Инсайт (обязательно)
-            <textarea name="insight" rows="2" required></textarea>
-          </label>
-          <div class="modal-actions">
-            <button type="button" class="btn ghost" id="edit-cancel">Отмена</button>
-            <button type="submit" class="btn primary">Сохранить</button>
-          </div>
-        </form>
-      </div>
-    </div>
 
     <footer class="app-footer">
       <a href="https://github.com/mybrosellscrack/mybrosellscrack.github.io" target="_blank">Исходный код на GitHub</a>
