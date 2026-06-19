@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Справочник упражнений – блуждающий нерв</title>
+    <style>
+        /* === сброс и базовые стили === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f5f4f0;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            color: #1e1e1e;
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 2.5rem;
+            letter-spacing: 0.02em;
+            color: #2c2c2c;
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            background: #ffffff;
+            border: 1px solid #d6d3cc;
+            padding: 1.2rem 1.5rem;
+            border-radius: 0.75rem;
+            font-size: 1.1rem;
+            font-weight: 450;
+            color: #1e1e1e;
+            cursor: pointer;
+            transition: background 0.2s, border-color 0.2s, box-shadow 0.15s;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.02);
+        }
+
+        .btn:hover {
+            background: #f9f7f2;
+            border-color: #b7b2a6;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .btn:active {
+            background: #efebe2;
+            border-color: #a29c8f;
+        }
+
+        .btn .icon {
+            font-size: 1.4rem;
+            flex-shrink: 0;
+            width: 2rem;
+            text-align: center;
+        }
+
+        .note {
+            font-size: 0.9rem;
+            color: #6b6b6b;
+            margin-top: 1rem;
+            font-style: italic;
+        }
+
+        /* === модальное окно === */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(30, 30, 30, 0.45);
+            backdrop-filter: blur(3px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.25s ease, visibility 0s 0.25s;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.25s ease, visibility 0s 0s;
+        }
+
+        .modal {
+            background: #ffffff;
+            max-width: 520px;
+            width: 90%;
+            border-radius: 1.2rem;
+            padding: 2rem 1.8rem 1.8rem;
+            box-shadow: 0 20px 35px rgba(0,0,0,0.15);
+            position: relative;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .modal h2 {
+            font-size: 1.5rem;
+            font-weight: 480;
+            margin-bottom: 1.2rem;
+            color: #1e1e1e;
+            padding-right: 2rem;
+        }
+
+        .modal p,
+        .modal li {
+            margin-bottom: 0.9rem;
+            color: #2e2e2e;
+        }
+
+        .modal ul {
+            padding-left: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal li {
+            margin-bottom: 0.5rem;
+        }
+
+        .modal .practice {
+            background: #f7f5ef;
+            border-left: 3px solid #b7a48b;
+            padding: 0.9rem 1.2rem;
+            border-radius: 0.5rem;
+            margin: 1.2rem 0 1rem;
+            font-size: 0.95rem;
+            color: #3d3d3d;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 1.2rem;
+            right: 1.2rem;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #6b6b6b;
+            line-height: 1;
+            padding: 0.2rem 0.5rem;
+            border-radius: 0.5rem;
+            transition: color 0.15s, background 0.15s;
+        }
+
+        .close-btn:hover {
+            color: #1e1e1e;
+            background: #f0ede5;
+        }
+
+        /* маленькие адаптации для мобильных */
+        @media (max-width: 480px) {
+            body {
+                padding: 1.2rem;
+            }
+            .btn {
+                padding: 1rem 1.2rem;
+                font-size: 1rem;
+            }
+            .modal {
+                padding: 1.5rem 1.2rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌿 три упражнения</h1>
+        <div class="button-group">
+            <button class="btn" id="btnVoice">
+                <span class="icon">🎤</span> Голос и вибрация
+            </button>
+            <button class="btn" id="btnVision">
+                <span class="icon">👁️</span> Расширение поля зрения
+            </button>
+            <button class="btn" id="btnFace">
+                <span class="icon">😌</span> Лёгкая полуулыбка и микродвижения лица
+            </button>
+        </div>
+        <div class="note">нажмите, чтобы открыть описание</div>
+    </div>
+
+    <!-- Модальное окно 1: Голос и вибрация -->
+    <div class="modal-overlay" id="modalVoice">
+        <div class="modal">
+            <button class="close-btn" aria-label="Закрыть">&times;</button>
+            <h2>🎤 Голос и вибрация</h2>
+            <p><strong>Прямая стимуляция блуждающего нерва через голосовые связки.</strong> Низкие вибрирующие звуки массируют нерв и помогают выйти из оборонительного зажима.</p>
+            <ul>
+                <li><strong>Мычание («М-м-м»).</strong> Закройте глаза, губы сомкнуты. На выдохе тяните звук «М-м-м-м», ощущая вибрацию в губах, щеках, носу, лбу. Это работает с «каской» на голове и лицевым панцирем.</li>
+                <li><strong>Пение гласных.</strong> Тяните нараспев «О», «У», «А» — низкие, спокойные, долгие. Важна вибрация в горле и груди, а не музыкальность.</li>
+                <li><strong>Полоскание горла (без воды).</strong> Имитируйте звук «кхр-кхр» на выдохе. Это мягко стимулирует мышцы глотки, соединённые с вагусом.</li>
+            </ul>
+            <div class="practice">
+                <strong>🔹 Практика:</strong> Когда чувствуете, что начинаете закрываться (например, при разговоре с близкими), не боритесь с этим. Уйдите на минуту в другую комнату, помычите или потяните гласный звук. Это сознательная саморегуляция: вы даёте телу другой сигнал.
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно 2: Расширение поля зрения -->
+    <div class="modal-overlay" id="modalVision">
+        <div class="modal">
+            <button class="close-btn" aria-label="Закрыть">&times;</button>
+            <h2>👁️ Расширение поля зрения</h2>
+            <p><strong>Панорамный взгляд для выхода из туннельного фокуса.</strong> Когда мы в обороне, зрение сужается. Сознательное расширение поля зрения включает парасимпатическую систему и сигнализирует мозгу: «Я в безопасности».</p>
+            <ul>
+                <li><strong>Остановитесь.</strong> Посмотрите прямо перед собой.</li>
+                <li><strong>Не двигая головой</strong> и не переводя взгляд, попробуйте охватить вниманием всё, что находится по бокам — справа, слева, вверху, внизу.</li>
+                <li>Представьте, что вы смотрите широкоугольным объективом. Заметьте предметы на периферии, цвета, движение света.</li>
+                <li>Дышите при этом ровно, не задерживайте дыхание.</li>
+            </ul>
+            <div class="practice">
+                <strong>🔹 Практика:</strong> Используйте это упражнение <i>перед</i> тем, как войти в разговор с сыном или женой, и сразу после. Это помогает не проваливаться в туннельное восприятие угрозы.
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно 3: Лёгкая полуулыбка и микродвижения лица -->
+    <div class="modal-overlay" id="modalFace">
+        <div class="modal">
+            <button class="close-btn" aria-label="Закрыть">&times;</button>
+            <h2>😌 Лёгкая полуулыбка и микродвижения лица</h2>
+            <p><strong>Мышцы лица связаны с вагусом.</strong> Меняя выражение лица, можно послать обратный сигнал в мозг, даже если внутри пустота или боль. Это не фальшь, а физиологический ключ.</p>
+            <ul>
+                <li><strong>Внутренняя полуулыбка.</strong> Чуть-чуть, едва заметно приподнимите уголки губ. Не нужно растягивать рот — только лёгкий мышечный импульс. Представьте, что вы улыбаетесь себе.</li>
+                <li><strong>Мягкие прикосновения к лицу.</strong> Кончиками пальцев легко погладьте лоб, брови, скулы, нижнюю челюсть. Это снимает спазм с мимических мышц и расслабляет «покерфейс».</li>
+            </ul>
+            <div class="practice">
+                <strong>🔹 Практика:</strong> Когда замечаете «лицо-кирпич», включите в фоновом режиме лёгкую полуулыбку и сделайте несколько мягких касаний к лицу. Это можно делать незаметно для окружающих.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // получаем элементы модальных окон и кнопок
+            const modalVoice = document.getElementById('modalVoice');
+            const modalVision = document.getElementById('modalVision');
+            const modalFace = document.getElementById('modalFace');
+
+            const btnVoice = document.getElementById('btnVoice');
+            const btnVision = document.getElementById('btnVision');
+            const btnFace = document.getElementById('btnFace');
+
+            // функция открытия конкретного модального окна
+            function openModal(modal) {
+                if (!modal) return;
+                modal.classList.add('active');
+            }
+
+            // функция закрытия всех модальных окон
+            function closeAllModals() {
+                [modalVoice, modalVision, modalFace].forEach(modal => {
+                    if (modal) modal.classList.remove('active');
+                });
+            }
+
+            // обработчики нажатий на кнопки
+            btnVoice.addEventListener('click', () => openModal(modalVoice));
+            btnVision.addEventListener('click', () => openModal(modalVision));
+            btnFace.addEventListener('click', () => openModal(modalFace));
+
+            // закрытие по клику на оверлей (фон за окном)
+            window.addEventListener('click', function(event) {
+                if (event.target.classList.contains('modal-overlay')) {
+                    closeAllModals();
+                }
+            });
+
+            // закрытие по кнопкам "закрыть" внутри модальных окон
+            document.querySelectorAll('.close-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const overlay = this.closest('.modal-overlay');
+                    if (overlay) {
+                        overlay.classList.remove('active');
+                    }
+                });
+            });
+
+            // закрытие по клавише Escape
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape') {
+                    closeAllModals();
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
