@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260" role="img" aria-labelledby="preview2-title">
+    <title id="preview2-title">Три модели и четвёртый путь: Христос в центре</title>
+    <defs>
+        <linearGradient id="preview2-bg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#f7f1e7"/>
+            <stop offset="55%" stop-color="#eef3f1"/>
+            <stop offset="100%" stop-color="#e2ecec"/>
+        </linearGradient>
+        <radialGradient id="preview2-gold" cx="42%" cy="35%" r="65%">
+            <stop offset="0%" stop-color="#fffaf0"/>
+            <stop offset="55%" stop-color="#ead6b5"/>
+            <stop offset="100%" stop-color="#c99c62"/>
+        </radialGradient>
+        <radialGradient id="preview2-red" cx="42%" cy="35%" r="65%">
+            <stop offset="0%" stop-color="#fff7f4"/>
+            <stop offset="55%" stop-color="#e8cfc9"/>
+            <stop offset="100%" stop-color="#b77a6d"/>
+        </radialGradient>
+        <radialGradient id="preview2-blue" cx="42%" cy="35%" r="65%">
+            <stop offset="0%" stop-color="#f4fbfc"/>
+            <stop offset="55%" stop-color="#cfe3e8"/>
+            <stop offset="100%" stop-color="#6f9aa8"/>
+        </radialGradient>
+        <radialGradient id="preview2-center" cx="42%" cy="35%" r="65%">
+            <stop offset="0%" stop-color="#6f98a6"/>
+            <stop offset="60%" stop-color="#3f6876"/>
+            <stop offset="100%" stop-color="#2d4f5c"/>
+        </radialGradient>
+        <filter id="preview2-shadow" x="-30%" y="-30%" width="160%" height="160%">
+            <feDropShadow dx="0" dy="6" stdDeviation="7" flood-color="#2b2a28" flood-opacity=".14"/>
+        </filter>
+    </defs>
+    <rect width="400" height="260" fill="url(#preview2-bg)"/>
+    <circle cx="200" cy="130" r="112" fill="none" stroke="rgba(58,95,111,.12)" stroke-dasharray="2 8"/>
+    <path d="M200 38 90 205h220L200 38Z" fill="none" stroke="rgba(58,95,111,.28)" stroke-width="1.4" stroke-dasharray="5 6"/>
+    <circle cx="200" cy="38" r="23" fill="url(#preview2-gold)" filter="url(#preview2-shadow)" opacity=".95"/>
+    <circle cx="90" cy="205" r="23" fill="url(#preview2-red)" filter="url(#preview2-shadow)" opacity=".95"/>
+    <circle cx="310" cy="205" r="23" fill="url(#preview2-blue)" filter="url(#preview2-shadow)" opacity=".95"/>
+    <circle cx="200" cy="135" r="47" fill="url(#preview2-center)" filter="url(#preview2-shadow)"/>
+    <circle cx="200" cy="135" r="47" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="1.5"/>
+    <g stroke="#fff" stroke-width="3.2" stroke-linecap="round" opacity=".95">
+        <path d="M200 112v30M188 124h24"/>
+    </g>
+    <text x="200" y="159" text-anchor="middle" font-family="'Palatino Linotype', 'Book Antiqua', Palatino, serif" font-size="12" fill="#e9f2f3">Христос</text>
+    <text x="200" y="77" text-anchor="middle" font-family="'Palatino Linotype', 'Book Antiqua', Palatino, serif" font-size="10" fill="#7a5330">Ориген</text>
+    <text x="90" y="243" text-anchor="middle" font-family="'Palatino Linotype', 'Book Antiqua', Palatino, serif" font-size="10" fill="#8a4d43">Пелагий</text>
+    <text x="310" y="243" text-anchor="middle" font-family="'Palatino Linotype', 'Book Antiqua', Palatino, serif" font-size="10" fill="#2f5a69">Августин</text>
+    <g fill="#b36b4b" opacity=".55">
+        <circle cx="40" cy="54" r="2.5"/>
+        <circle cx="360" cy="62" r="2"/>
+        <circle cx="52" cy="126" r="2"/>
+        <circle cx="354" cy="124" r="2.5"/>
+    </g>
+</svg>
