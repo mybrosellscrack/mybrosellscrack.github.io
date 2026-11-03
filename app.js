@@ -1,6 +1,15 @@
 // ============ Данные статей (только метаданные, контент в blog/*.html) ============
 const ARTICLES = [
   {
+    id: "monergism1",
+    title: "«Монергизм» или синергия? Разбор работы Е.А. Жукова. Часть 1",
+    excerpt: "Проверка тезисов об одной воле, страхе смерти и синергии по Писанию, соборному учению и согласию отцов.",
+    date: "3 ноября 2026",
+    tags: ["богословие", "синергия", "разбор"],
+    preview: "blog/monergism1-preview.svg",
+    previewAlt: "Две воли: нетварная и тварная"
+  },
+  {
     id: "neuro1",
     title: "Нейрофизиология греха и привычки: роль дофамина, стриатума и когнитивного диссонанса",
     excerpt: "Как формируются греховные привычки на уровне мозга? Роль дофаминовых путей, стриатума, когнитивного диссонанса. Научный взгляд на духовную борьбу.",
@@ -133,20 +142,27 @@ function renderBlog() {
   blogEmpty.style.display = "none";
   ARTICLES.forEach((article) => {
     const card = document.createElement("a");
-    card.className = "blog-card";
+    const hasPreview = Boolean(article.preview);
+    card.className = hasPreview ? "blog-card blog-card--with-thumb" : "blog-card";
     card.href = `blog/${article.id}.html`;
     let tagsHtml = "";
     if (article.tags && article.tags.length) {
       tagsHtml = `<div class="blog-tags">${article.tags.map(t => `<span class="blog-tag">${escapeHtml(t)}</span>`).join("")}</div>`;
     }
+    const previewHtml = hasPreview
+      ? `<div class="blog-thumb"><img src="${escapeHtml(article.preview)}" alt="${escapeHtml(article.previewAlt || "")}" loading="lazy" /></div>`
+      : "";
     card.innerHTML = `
-      <h3>${escapeHtml(article.title)}</h3>
-      <div class="blog-meta">
-        <span class="blog-date">${escapeHtml(article.date || "")}</span>
-        ${tagsHtml}
-      </div>
-      <p class="blog-excerpt">${escapeHtml(article.excerpt)}</p>
-      <span class="blog-readmore">Читать далее</span>`;
+      ${previewHtml}
+      <div class="blog-card__body">
+        <h3>${escapeHtml(article.title)}</h3>
+        <div class="blog-meta">
+          <span class="blog-date">${escapeHtml(article.date || "")}</span>
+          ${tagsHtml}
+        </div>
+        <p class="blog-excerpt">${escapeHtml(article.excerpt)}</p>
+        <span class="blog-readmore">Читать далее</span>
+      </div>`;
     blogList.appendChild(card);
   });
 }
