@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260" role="img" aria-labelledby="book6-preview-title">
+    <title id="book6-preview-title">Оранж 529 и Трулль 692</title>
+    <defs>
+        <linearGradient id="book6-bg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#f7f1e7"/>
+            <stop offset="55%" stop-color="#eef3f1"/>
+            <stop offset="100%" stop-color="#e2ecec"/>
+        </linearGradient>
+        <radialGradient id="book6-gold" cx="42%" cy="35%" r="65%">
+            <stop offset="0%" stop-color="#fffaf0"/>
+            <stop offset="55%" stop-color="#ead6b5"/>
+            <stop offset="100%" stop-color="#c99c62"/>
+        </radialGradient>
+        <radialGradient id="book6-blue" cx="42%" cy="35%" r="65%">
+            <stop offset="0%" stop-color="#f4fbfc"/>
+            <stop offset="55%" stop-color="#cfe3e8"/>
+            <stop offset="100%" stop-color="#6f9aa8"/>
+        </radialGradient>
+        <radialGradient id="book6-cross" cx="42%" cy="35%" r="65%">
+            <stop offset="0%" stop-color="#6f98a6"/>
+            <stop offset="60%" stop-color="#3f6876"/>
+            <stop offset="100%" stop-color="#2d4f5c"/>
+        </radialGradient>
+        <filter id="book6-shadow" x="-30%" y="-30%" width="160%" height="160%">
+            <feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#2b2a28" flood-opacity=".12"/>
+        </filter>
+    </defs>
+    <rect width="400" height="260" fill="url(#book6-bg)"/>
+    <circle cx="200" cy="130" r="112" fill="none" stroke="rgba(58,95,111,.12)" stroke-dasharray="2 8"/>
+    <circle cx="200" cy="43" r="27" fill="url(#book6-cross)" filter="url(#book6-shadow)"/>
+    <g stroke="#fff" stroke-width="2.6" stroke-linecap="round" opacity=".95">
+        <path d="M200 30v20M193 37h14"/>
+    </g>
+    <path d="M158 155h84" stroke="rgba(58,95,111,.35)" stroke-width="1.6" stroke-dasharray="4 5"/>
+    <circle cx="110" cy="155" r="48" fill="url(#book6-gold)" filter="url(#book6-shadow)" opacity=".96"/>
+    <circle cx="290" cy="155" r="48" fill="url(#book6-blue)" filter="url(#book6-shadow)" opacity=".96"/>
+    <text x="110" y="163" text-anchor="middle" font-family="'Palatino Linotype', 'Book Antiqua', Palatino, serif" font-size="24" fill="#6d4a2b">529</text>
+    <text x="290" y="163" text-anchor="middle" font-family="'Palatino Linotype', 'Book Antiqua', Palatino, serif" font-size="24" fill="#2f5a69">692</text>
+    <text x="110" y="220" text-anchor="middle" font-family="'Palatino Linotype', 'Book Antiqua', Palatino, serif" font-size="11" fill="#7a5330">Оранж</text>
+    <text x="290" y="220" text-anchor="middle" font-family="'Palatino Linotype', 'Book Antiqua', Palatino, serif" font-size="11" fill="#2f5a69">Трулль</text>
+    <text x="200" y="243" text-anchor="middle" font-family="'Palatino Linotype', 'Book Antiqua', Palatino, serif" font-size="10" fill="#2d4f5c">Соборы и рецепция</text>
+    <g fill="#b36b4b" opacity=".55">
+        <circle cx="38" cy="52" r="2.5"/>
+        <circle cx="362" cy="60" r="2"/>
+        <circle cx="48" cy="146" r="2"/>
+        <circle cx="354" cy="144" r="2.5"/>
+    </g>
+</svg>

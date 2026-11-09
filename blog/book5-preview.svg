@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260" role="img" aria-labelledby="book5-preview-title">
-    <title id="book5-preview-title">Хронология событий 411–418 годов</title>
+    <title id="book5-preview-title">Соборы 411–431: Карфаген, Диосполь, Карфаген и Ефес</title>
     <defs>
         <linearGradient id="book5-bg" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0%" stop-color="#f7f1e7"/>
@@ -17,38 +17,30 @@
     </defs>
     <rect width="400" height="260" fill="url(#book5-bg)"/>
     <circle cx="200" cy="130" r="112" fill="none" stroke="rgba(58,95,111,.12)" stroke-dasharray="2 8"/>
-    <circle cx="200" cy="45" r="29" fill="url(#book5-cross)" filter="url(#book5-shadow)"/>
-    <g stroke="#fff" stroke-width="2.7" stroke-linecap="round" opacity=".95">
-        <path d="M200 31v22M192 38h16"/>
+    <circle cx="200" cy="43" r="27" fill="url(#book5-cross)" filter="url(#book5-shadow)"/>
+    <g stroke="#fff" stroke-width="2.6" stroke-linecap="round" opacity=".95">
+        <path d="M200 30v20M193 37h14"/>
     </g>
-    <path d="M50 155h300" stroke="rgba(58,95,111,.35)" stroke-width="1.6" stroke-linecap="round"/>
+    <path d="M50 158h300" stroke="rgba(58,95,111,.35)" stroke-width="1.6" stroke-linecap="round"/>
     <g fill="#c99c62">
-        <circle cx="75" cy="155" r="7"/>
-        <circle cx="140" cy="155" r="7"/>
-        <circle cx="205" cy="155" r="7"/>
-        <circle cx="270" cy="155" r="7"/>
-        <circle cx="335" cy="155" r="7"/>
+        <circle cx="60" cy="158" r="7"/><circle cx="125" cy="158" r="7"/><circle cx="190" cy="158" r="7"/><circle cx="255" cy="158" r="7"/><circle cx="320" cy="158" r="7"/>
     </g>
     <g fill="#3f6876">
-        <circle cx="75" cy="155" r="3"/>
-        <circle cx="140" cy="155" r="3"/>
-        <circle cx="205" cy="155" r="3"/>
-        <circle cx="270" cy="155" r="3"/>
-        <circle cx="335" cy="155" r="3"/>
+        <circle cx="60" cy="158" r="3"/><circle cx="125" cy="158" r="3"/><circle cx="190" cy="158" r="3"/><circle cx="255" cy="158" r="3"/><circle cx="320" cy="158" r="3"/>
     </g>
     <g font-family="'Palatino Linotype', 'Book Antiqua', Palatino, serif" text-anchor="middle">
-        <text x="75" y="130" font-size="11" fill="#7a5330">411</text>
-        <text x="140" y="130" font-size="11" fill="#7a5330">415</text>
-        <text x="205" y="130" font-size="11" fill="#7a5330">416</text>
-        <text x="270" y="130" font-size="11" fill="#7a5330">417</text>
-        <text x="335" y="130" font-size="11" fill="#7a5330">418</text>
-        <text x="75" y="184" font-size="9" fill="#2f5a69">Карфаген</text>
-        <text x="140" y="184" font-size="9" fill="#2f5a69">Диосполь</text>
-        <text x="205" y="184" font-size="9" fill="#2f5a69">Соборы</text>
-        <text x="270" y="184" font-size="9" fill="#2f5a69">Рим</text>
-        <text x="335" y="184" font-size="9" fill="#2f5a69">Рим</text>
+        <text x="60" y="136" font-size="11" fill="#7a5330">411</text>
+        <text x="125" y="136" font-size="11" fill="#7a5330">415</text>
+        <text x="190" y="136" font-size="11" fill="#7a5330">416</text>
+        <text x="255" y="136" font-size="11" fill="#7a5330">418</text>
+        <text x="320" y="136" font-size="11" fill="#7a5330">431</text>
+        <text x="60" y="188" font-size="9" fill="#2f5a69">Карфаген</text>
+        <text x="125" y="188" font-size="9" fill="#2f5a69">Диосполь</text>
+        <text x="190" y="188" font-size="9" fill="#2f5a69">Соборы</text>
+        <text x="255" y="188" font-size="9" fill="#2f5a69">Карфаген</text>
+        <text x="320" y="188" font-size="9" fill="#2f5a69">Ефес</text>
     </g>
-    <text x="200" y="228" text-anchor="middle" font-family="'Palatino Linotype', 'Book Antiqua', Palatino, serif" font-size="10" fill="#2d4f5c">Хронология 411–418</text>
+    <text x="200" y="228" text-anchor="middle" font-family="'Palatino Linotype', 'Book Antiqua', Palatino, serif" font-size="10" fill="#2d4f5c">Соборы 411–431</text>
     <g fill="#b36b4b" opacity=".55">
         <circle cx="38" cy="52" r="2.5"/>
         <circle cx="362" cy="60" r="2"/>

@@ -1694,6 +1694,13 @@ html {
     line-height: 1.35;
 }
 
+.review-content h5 {
+    margin: 22px 0 8px;
+    color: var(--accent-2);
+    font-size: 15px;
+    line-height: 1.35;
+}
+
 .series-nav {
     display: flex;
     flex-wrap: wrap;

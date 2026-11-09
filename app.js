@@ -38,6 +38,29 @@ const SERIES = {
   ]
 };
 
+const BOOK_SERIES = {
+  id: "book",
+  kicker: "Разбор книги · 9 частей",
+  badge: "Книга",
+  title: "«История и философия монергизма»",
+  subtitle: "Прямой разбор книги Е.А. Жукова. Том 1",
+  excerpt: "Девять частей: от предисловия и первородного греха до соборов, предопределения и заключения.",
+  tags: ["богословие", "монергизм", "разбор книги"],
+  href: "blog/book.html",
+  linkLabel: "Оглавление книги",
+  parts: [
+    { id: "book1", num: 1, title: "Предисловие", time: "35 мин" },
+    { id: "book2", num: 2, title: "Первородный грех", time: "30 мин" },
+    { id: "book3", num: 3, title: "Крещение младенцев", time: "35 мин" },
+    { id: "book4", num: 4, title: "Промежуточные выводы", time: "35 мин" },
+    { id: "book5", num: 5, title: "Соборы I: Карфаген и Ефес", time: "1 ч 40 мин" },
+    { id: "book6", num: 6, title: "Соборы II: Оранж и Трулль", time: "1 ч 30 мин" },
+    { id: "book7", num: 7, title: "Предопределение до Августина", time: "1 ч 15 мин" },
+    { id: "book8", num: 8, title: "Августин и православный ответ", time: "1 ч 15 мин" },
+    { id: "book9", num: 9, title: "Заключение", time: "25 мин" }
+  ]
+};
+
 const BOOSTY_SERIES = {
   id: "boosty",
   kicker: "Boosty · 5 частей",
@@ -198,7 +221,7 @@ function renderBlog() {
     return;
   }
   blogEmpty.style.display = "none";
-  blogList.appendChild(renderSeriesCard(SERIES));
+  blogList.appendChild(renderSeriesCard(BOOK_SERIES));
   blogList.appendChild(renderSeriesCard(BOOSTY_SERIES));
   ARTICLES.forEach((article) => {
     const card = document.createElement("a");
