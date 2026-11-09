@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260" role="img" aria-labelledby="book1-preview-title">
+    <title id="book1-preview-title">Книга о монергизме: два ложных полюса и путь синергии</title>
+    <defs>
+        <linearGradient id="book1-bg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#f7f1e7"/>
+            <stop offset="55%" stop-color="#eef3f1"/>
+            <stop offset="100%" stop-color="#e2ecec"/>
+        </linearGradient>
+        <linearGradient id="book1-pages" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#fffaf0"/>
+            <stop offset="100%" stop-color="#e7d4b4"/>
+        </linearGradient>
+        <radialGradient id="book1-cross" cx="42%" cy="35%" r="65%">
+            <stop offset="0%" stop-color="#6f98a6"/>
+            <stop offset="60%" stop-color="#3f6876"/>
+            <stop offset="100%" stop-color="#2d4f5c"/>
+        </radialGradient>
+        <filter id="book1-shadow" x="-30%" y="-30%" width="160%" height="160%">
+            <feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#2b2a28" flood-opacity=".12"/>
+        </filter>
+    </defs>
+    <rect width="400" height="260" fill="url(#book1-bg)"/>
+    <circle cx="200" cy="130" r="112" fill="none" stroke="rgba(58,95,111,.12)" stroke-dasharray="2 8"/>
+    <path d="M200 198V112M200 168C165 155 125 130 85 110M200 168c35-13 75-38 115-58" fill="none" stroke="rgba(58,95,111,.4)" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="5 6"/>
+    <path d="M200 198V112" stroke="#3f6876" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="none"/>
+    <circle cx="85" cy="110" r="21" fill="#e8cfc9" opacity=".9"/>
+    <circle cx="315" cy="110" r="21" fill="#cfe3e8" opacity=".9"/>
+    <circle cx="200" cy="62" r="34" fill="url(#book1-cross)" filter="url(#book1-shadow)"/>
+    <g stroke="#fff" stroke-width="2.8" stroke-linecap="round" opacity=".95">
+        <path d="M200 45v26M191 53h18"/>
+    </g>
+    <path d="M120 190q40-12 80 4v42q-40-16-80-4Z" fill="url(#book1-pages)" filter="url(#book1-shadow)"/>
+    <path d="M280 190q-40-12-80 4v42q40-16 80-4Z" fill="url(#book1-pages)" filter="url(#book1-shadow)"/>
+    <path d="M200 194v42" stroke="#c79b63" stroke-width="1.4" opacity=".7"/>
+    <g stroke="#c9a77a" stroke-width="1" opacity=".55">
+        <path d="M132 202q34-8 58 2M132 212q34-8 58 2M132 222q34-8 58 2"/>
+        <path d="M268 202q-34-8-58 2M268 212q-34-8-58 2M268 222q-34-8-58 2"/>
+    </g>
+    <text x="85" y="144" text-anchor="middle" font-family="'Palatino Linotype', 'Book Antiqua', Palatino, serif" font-size="9" fill="#8a4d43">Монергизм</text>
+    <text x="315" y="144" text-anchor="middle" font-family="'Palatino Linotype', 'Book Antiqua', Palatino, serif" font-size="9" fill="#2f5a69">Пелагианство</text>
+    <text x="200" y="112" text-anchor="middle" font-family="'Palatino Linotype', 'Book Antiqua', Palatino, serif" font-size="10" fill="#2d4f5c">Синергия</text>
+    <g fill="#b36b4b" opacity=".55">
+        <circle cx="38" cy="52" r="2.5"/>
+        <circle cx="362" cy="60" r="2"/>
+        <circle cx="48" cy="146" r="2"/>
+        <circle cx="354" cy="144" r="2.5"/>
+    </g>
+</svg>

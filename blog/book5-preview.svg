@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260" role="img" aria-labelledby="book5-preview-title">
+    <title id="book5-preview-title">Хронология событий 411–418 годов</title>
+    <defs>
+        <linearGradient id="book5-bg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#f7f1e7"/>
+            <stop offset="55%" stop-color="#eef3f1"/>
+            <stop offset="100%" stop-color="#e2ecec"/>
+        </linearGradient>
+        <radialGradient id="book5-cross" cx="42%" cy="35%" r="65%">
+            <stop offset="0%" stop-color="#6f98a6"/>
+            <stop offset="60%" stop-color="#3f6876"/>
+            <stop offset="100%" stop-color="#2d4f5c"/>
+        </radialGradient>
+        <filter id="book5-shadow" x="-30%" y="-30%" width="160%" height="160%">
+            <feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#2b2a28" flood-opacity=".12"/>
+        </filter>
+    </defs>
+    <rect width="400" height="260" fill="url(#book5-bg)"/>
+    <circle cx="200" cy="130" r="112" fill="none" stroke="rgba(58,95,111,.12)" stroke-dasharray="2 8"/>
+    <circle cx="200" cy="45" r="29" fill="url(#book5-cross)" filter="url(#book5-shadow)"/>
+    <g stroke="#fff" stroke-width="2.7" stroke-linecap="round" opacity=".95">
+        <path d="M200 31v22M192 38h16"/>
+    </g>
+    <path d="M50 155h300" stroke="rgba(58,95,111,.35)" stroke-width="1.6" stroke-linecap="round"/>
+    <g fill="#c99c62">
+        <circle cx="75" cy="155" r="7"/>
+        <circle cx="140" cy="155" r="7"/>
+        <circle cx="205" cy="155" r="7"/>
+        <circle cx="270" cy="155" r="7"/>
+        <circle cx="335" cy="155" r="7"/>
+    </g>
+    <g fill="#3f6876">
+        <circle cx="75" cy="155" r="3"/>
+        <circle cx="140" cy="155" r="3"/>
+        <circle cx="205" cy="155" r="3"/>
+        <circle cx="270" cy="155" r="3"/>
+        <circle cx="335" cy="155" r="3"/>
+    </g>
+    <g font-family="'Palatino Linotype', 'Book Antiqua', Palatino, serif" text-anchor="middle">
+        <text x="75" y="130" font-size="11" fill="#7a5330">411</text>
+        <text x="140" y="130" font-size="11" fill="#7a5330">415</text>
+        <text x="205" y="130" font-size="11" fill="#7a5330">416</text>
+        <text x="270" y="130" font-size="11" fill="#7a5330">417</text>
+        <text x="335" y="130" font-size="11" fill="#7a5330">418</text>
+        <text x="75" y="184" font-size="9" fill="#2f5a69">Карфаген</text>
+        <text x="140" y="184" font-size="9" fill="#2f5a69">Диосполь</text>
+        <text x="205" y="184" font-size="9" fill="#2f5a69">Соборы</text>
+        <text x="270" y="184" font-size="9" fill="#2f5a69">Рим</text>
+        <text x="335" y="184" font-size="9" fill="#2f5a69">Рим</text>
+    </g>
+    <text x="200" y="228" text-anchor="middle" font-family="'Palatino Linotype', 'Book Antiqua', Palatino, serif" font-size="10" fill="#2d4f5c">Хронология 411–418</text>
+    <g fill="#b36b4b" opacity=".55">
+        <circle cx="38" cy="52" r="2.5"/>
+        <circle cx="362" cy="60" r="2"/>
+        <circle cx="48" cy="146" r="2"/>
+        <circle cx="354" cy="144" r="2.5"/>
+    </g>
+</svg>

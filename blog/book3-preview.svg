@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260" role="img" aria-labelledby="book3-preview-title">
+    <title id="book3-preview-title">Крещальная купель, вода и крест</title>
+    <defs>
+        <linearGradient id="book3-bg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#f7f1e7"/>
+            <stop offset="55%" stop-color="#eef3f1"/>
+            <stop offset="100%" stop-color="#e2ecec"/>
+        </linearGradient>
+        <linearGradient id="book3-gold" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#f6e7cc"/>
+            <stop offset="100%" stop-color="#d2ad78"/>
+        </linearGradient>
+        <radialGradient id="book3-water" cx="50%" cy="30%" r="70%">
+            <stop offset="0%" stop-color="#dff0f3"/>
+            <stop offset="60%" stop-color="#9fc1ca"/>
+            <stop offset="100%" stop-color="#5f8b99"/>
+        </radialGradient>
+        <radialGradient id="book3-cross" cx="42%" cy="35%" r="65%">
+            <stop offset="0%" stop-color="#6f98a6"/>
+            <stop offset="60%" stop-color="#3f6876"/>
+            <stop offset="100%" stop-color="#2d4f5c"/>
+        </radialGradient>
+        <filter id="book3-shadow" x="-30%" y="-30%" width="160%" height="160%">
+            <feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#2b2a28" flood-opacity=".12"/>
+        </filter>
+    </defs>
+    <rect width="400" height="260" fill="url(#book3-bg)"/>
+    <circle cx="200" cy="130" r="112" fill="none" stroke="rgba(58,95,111,.12)" stroke-dasharray="2 8"/>
+    <circle cx="200" cy="52" r="33" fill="url(#book3-cross)" filter="url(#book3-shadow)"/>
+    <g stroke="#fff" stroke-width="2.8" stroke-linecap="round" opacity=".95">
+        <path d="M200 35v26M191 43h18"/>
+    </g>
+    <path d="M118 152q82 42 164 0l-14 42q-68 30-136 0Z" fill="url(#book3-gold)" filter="url(#book3-shadow)"/>
+    <ellipse cx="200" cy="155" rx="82" ry="14" fill="url(#book3-water)"/>
+    <path d="M134 156q18 5 33 0t33 0 33 0 33 0" fill="none" stroke="#f4fbfc" stroke-width="1.6" stroke-linecap="round" opacity=".75"/>
+    <rect x="190" y="194" width="20" height="31" rx="5" fill="#d2ad78"/>
+    <rect x="158" y="222" width="84" height="10" rx="5" fill="#c99c62" opacity=".9"/>
+    <g fill="#7fa9b5" opacity=".75">
+        <path d="M120 102c-6 8-6 13 0 19 6-6 6-11 0-19Z"/>
+        <path d="M282 96c-5 7-5 11 0 16 5-5 5-9 0-16Z"/>
+        <path d="M300 134c-4 5-4 9 0 13 4-4 4-8 0-13Z"/>
+    </g>
+    <text x="200" y="252" text-anchor="middle" font-family="'Palatino Linotype', 'Book Antiqua', Palatino, serif" font-size="10" fill="#2d4f5c">Крещение</text>
+    <g fill="#b36b4b" opacity=".55">
+        <circle cx="38" cy="52" r="2.5"/>
+        <circle cx="362" cy="60" r="2"/>
+        <circle cx="48" cy="146" r="2"/>
+        <circle cx="354" cy="144" r="2.5"/>
+    </g>
+</svg>

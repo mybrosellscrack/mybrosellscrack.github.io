@@ -1,51 +1,6 @@
 // ============ Данные статей (только метаданные, контент в blog/*.html) ============
 const ARTICLES = [
   {
-    id: "monergism5",
-    title: "«Монергизм» или синергия? Часть 5: учение о первородном грехе до Августина",
-    excerpt: "Итоговый синтез: два мнимых направления, ложный выбор между Пелагием и Августином и подлинное Предание Церкви.",
-    date: "4 ноября 2026",
-    tags: ["богословие", "патрология", "синергия"],
-    preview: "blog/monergism5-preview.svg",
-    previewAlt: "Ложный выбор между Востоком и Западом и путь Церкви"
-  },
-  {
-    id: "monergism4",
-    title: "«Монергизм» или синергия? Часть 4: Иларий, Амвросий, Амвросиаст, Златоуст",
-    excerpt: "IV век: разные богословские языки, но единая вера. Что на самом деле говорят четыре автора о грехе, благодати и свободе.",
-    date: "4 ноября 2026",
-    tags: ["богословие", "патрология", "синергия"],
-    preview: "blog/monergism4-preview.svg",
-    previewAlt: "Иларий, Амвросий, Амвросиаст и Златоуст вокруг креста Христова"
-  },
-  {
-    id: "monergism3",
-    title: "«Монергизм» или синергия? Часть 3: Тертуллиан, Ориген, Киприан",
-    excerpt: "Западная генеалогия «Тертуллиан — Ориген — Киприан — Августин»: что на самом деле говорят их тексты о грехе, свободе и крещении.",
-    date: "3 ноября 2026",
-    tags: ["богословие", "патрология", "синергия"],
-    preview: "blog/monergism3-preview.svg",
-    previewAlt: "Тертуллиан, Ориген и Киприан: три свидетеля и крест Христов"
-  },
-  {
-    id: "monergism2",
-    title: "«Монергизм» или синергия? Часть 2: до начала споров",
-    excerpt: "Первородный грех, благодать, крещение младенцев и ложная трилемма «Ориген — Пелагий — Августин».",
-    date: "3 ноября 2026",
-    tags: ["богословие", "первородный грех", "синергия"],
-    preview: "blog/monergism2-preview.svg",
-    previewAlt: "Три модели и четвёртый путь: Христос в центре"
-  },
-  {
-    id: "monergism1",
-    title: "«Монергизм» или синергия? Разбор работы Е.А. Жукова. Часть 1",
-    excerpt: "Проверка тезисов об одной воле, страхе смерти и синергии по Писанию, соборному учению и согласию отцов.",
-    date: "3 ноября 2026",
-    tags: ["богословие", "синергия", "разбор"],
-    preview: "blog/monergism1-preview.svg",
-    previewAlt: "Две воли: нетварная и тварная"
-  },
-  {
     id: "neuro1",
     title: "Нейрофизиология греха и привычки: роль дофамина, стриатума и когнитивного диссонанса",
     excerpt: "Как формируются греховные привычки на уровне мозга? Роль дофаминовых путей, стриатума, когнитивного диссонанса. Научный взгляд на духовную борьбу.",
@@ -60,6 +15,48 @@ const ARTICLES = [
     tags: ["антропология", "святоотеческое", "трисоставность"]
   }
 ];
+
+const SERIES = {
+  id: "series",
+  kicker: "Серия · 8 частей",
+  title: "Монергизм или синергия?",
+  subtitle: "Разбор книги Е.А. Жукова «История и философия монергизма. Том 1»",
+  excerpt: "Полный разбор в 8 частях: ложная дихотомия, первородный грех, отцы Церкви, соборы, Златоуст, Августин и православный ответ.",
+  date: "9 ноября 2026",
+  tags: ["богословие", "монергизм", "серия"],
+  href: "blog/series.html",
+  linkLabel: "Оглавление серии",
+  parts: [
+    { id: "series1", num: 1, title: "Главный тезис", desc: "Почему выбор «монергизм или пелагианство» ложен.", time: "19 мин" },
+    { id: "series2", num: 2, title: "Первородный грех", desc: "Вина или повреждение? Что мы наследуем от Адама.", time: "21 мин" },
+    { id: "series3", num: 3, title: "Отцы до Августина", desc: "Тертуллиан, Ориген, Киприан, Иларий, Амвросий, Амвросиаст.", time: "23 мин" },
+    { id: "series4", num: 4, title: "Соборы: Карфаген 418 и Ефес 431", desc: "Что действительно определили соборы, а что им приписали позже.", time: "19 мин" },
+    { id: "series5", num: 5, title: "Оранж 529 и Трулль 692", desc: "Западный синтез и восточная рецепция: синергия и каноны.", time: "19 мин" },
+    { id: "series6", num: 6, title: "Златоуст и Пелагий", desc: "Почему «структурное тождество» — миф. Вера как дар Божий.", time: "21 мин" },
+    { id: "series7", num: 7, title: "Августин", desc: "Отец Церкви, но не единственный учитель: границы системы.", time: "21 мин" },
+    { id: "series8", num: 8, title: "Предопределение и синергия", desc: "Православный ответ: предопределение по предведению и итог серии.", time: "21 мин" }
+  ]
+};
+
+const BOOSTY_SERIES = {
+  id: "boosty",
+  kicker: "Boosty · 5 частей",
+  badge: "Boosty",
+  title: "«Монергизм» или синергия? Разбор статей с Boosty",
+  subtitle: "Разбор обобщённых статей с Boosty",
+  excerpt: "Ранняя версия разбора: пять обобщённых статей с Boosty о книге Е.А. Жукова «История и философия монергизма».",
+  date: "3–4 ноября 2026",
+  tags: ["богословие", "Boosty", "разбор"],
+  href: "blog/boosty.html",
+  linkLabel: "Оглавление Boosty-серии",
+  parts: [
+    { id: "monergism1", num: 1, title: "Одна воля", desc: "Разбор тезиса об одной воле и страхе смерти.", time: "20 мин" },
+    { id: "monergism2", num: 2, title: "До начала споров", desc: "Три модели и ложная трилемма «Ориген — Пелагий — Августин».", time: "25 мин" },
+    { id: "monergism3", num: 3, title: "Тертуллиан, Ориген, Киприан", desc: "Западная генеалогия и восточная традиция.", time: "30 мин" },
+    { id: "monergism4", num: 4, title: "Иларий, Амвросий, Амвросиаст, Златоуст", desc: "Соборы и «проигнорированное» осуждение.", time: "30 мин" },
+    { id: "monergism5", num: 5, title: "Первородный грех до Августина", desc: "Итоговый синтез и православный ответ.", time: "35 мин" }
+  ]
+};
 
 // ============ Индекс душевного здоровья ============
 const STORAGE_KEY = "sj_data_v1";
@@ -166,6 +163,31 @@ document.querySelectorAll(".nav-tab").forEach((btn) => {
 });
 
 // ============ Блог ============
+function renderSeriesCard(series) {
+  const card = document.createElement("article");
+  card.className = series.id === "boosty" ? "series-card series-card--boosty" : "series-card";
+  const parts = series.parts.map((part) => `
+      <a class="series-mini" href="blog/${escapeHtml(part.id)}.html">
+        <div class="series-mini__thumb"><img src="blog/${escapeHtml(part.id)}-preview.svg" alt="" loading="lazy" /></div>
+        <div class="series-mini__body">
+          <span class="series-mini__num">Часть ${part.num} · ${escapeHtml(part.time)}</span>
+          <span class="series-mini__title">${escapeHtml(part.title)}</span>
+        </div>
+      </a>`).join("");
+  const tags = series.tags.map((tag) => `<span class="blog-tag">${escapeHtml(tag)}</span>`).join("");
+  const badge = series.badge ? `<span class="series-card__badge">${escapeHtml(series.badge)}</span>` : "";
+  card.innerHTML = `
+    <div class="series-card__kicker">${escapeHtml(series.kicker)}${badge}</div>
+    <h3><a href="${series.href}">${escapeHtml(series.title)}</a></h3>
+    <p class="series-card__desc">${escapeHtml(series.excerpt)}</p>
+    <div class="series-card__meta">
+      <div class="blog-tags">${tags}</div>
+    </div>
+    <div class="series-card__grid">${parts}</div>
+    <div class="series-card__footer"><a class="series-card__all" href="${series.href}">${escapeHtml(series.linkLabel || "Оглавление серии")} →</a></div>`;
+  return card;
+}
+
 function renderBlog() {
   const blogList = document.getElementById("blog-list");
   const blogEmpty = document.getElementById("blog-empty");
@@ -176,6 +198,8 @@ function renderBlog() {
     return;
   }
   blogEmpty.style.display = "none";
+  blogList.appendChild(renderSeriesCard(SERIES));
+  blogList.appendChild(renderSeriesCard(BOOSTY_SERIES));
   ARTICLES.forEach((article) => {
     const card = document.createElement("a");
     const hasPreview = Boolean(article.preview);
@@ -193,7 +217,6 @@ function renderBlog() {
       <div class="blog-card__body">
         <h3>${escapeHtml(article.title)}</h3>
         <div class="blog-meta">
-          <span class="blog-date">${escapeHtml(article.date || "")}</span>
           ${tagsHtml}
         </div>
         <p class="blog-excerpt">${escapeHtml(article.excerpt)}</p>

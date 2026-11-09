@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260" role="img" aria-labelledby="series-preview-title">
+    <title id="series-preview-title">Часть 1 из 8</title>
+    <defs>
+        <linearGradient id="series-preview-bg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#f7f1e7"/>
+            <stop offset="55%" stop-color="#eef3f1"/>
+            <stop offset="100%" stop-color="#e2ecec"/>
+        </linearGradient>
+        <radialGradient id="series-preview-cross" cx="42%" cy="35%" r="65%">
+            <stop offset="0%" stop-color="#6f98a6"/>
+            <stop offset="60%" stop-color="#3f6876"/>
+            <stop offset="100%" stop-color="#2d4f5c"/>
+        </radialGradient>
+        <radialGradient id="series-preview-number" cx="42%" cy="35%" r="65%">
+            <stop offset="0%" stop-color="#fffaf0"/>
+            <stop offset="55%" stop-color="#ead6b5"/>
+            <stop offset="100%" stop-color="#c99c62"/>
+        </radialGradient>
+        <filter id="series-preview-shadow" x="-30%" y="-30%" width="160%" height="160%">
+            <feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#2b2a28" flood-opacity=".12"/>
+        </filter>
+    </defs>
+    <rect width="400" height="260" fill="url(#series-preview-bg)"/>
+    <circle cx="200" cy="130" r="112" fill="none" stroke="rgba(58,95,111,.12)" stroke-dasharray="2 8"/>
+    <circle cx="200" cy="42" r="27" fill="url(#series-preview-cross)" filter="url(#series-preview-shadow)"/>
+    <g stroke="#fff" stroke-width="2.6" stroke-linecap="round" opacity=".95">
+        <path d="M200 29v20M193 36h14"/>
+    </g>
+    <circle cx="200" cy="135" r="56" fill="url(#series-preview-number)" filter="url(#series-preview-shadow)" opacity=".96"/>
+    <text x="200" y="155" text-anchor="middle" font-family="'Palatino Linotype', 'Book Antiqua', Palatino, serif" font-size="50" fill="#6d4a2b">1</text>
+    <text x="200" y="178" text-anchor="middle" font-family="'Palatino Linotype', 'Book Antiqua', Palatino, serif" font-size="10" fill="#7a5330">из 8</text>
+    <circle cx="80" cy="222" r="8" fill="#b36b4b"/><circle cx="80" cy="222" r="3.2" fill="#fff"/><circle cx="114" cy="222" r="4.5" fill="rgba(58,95,111,.32)"/><circle cx="148" cy="222" r="4.5" fill="rgba(58,95,111,.32)"/><circle cx="182" cy="222" r="4.5" fill="rgba(58,95,111,.32)"/><circle cx="216" cy="222" r="4.5" fill="rgba(58,95,111,.32)"/><circle cx="250" cy="222" r="4.5" fill="rgba(58,95,111,.32)"/><circle cx="284" cy="222" r="4.5" fill="rgba(58,95,111,.32)"/><circle cx="318" cy="222" r="4.5" fill="rgba(58,95,111,.32)"/>
+    <g fill="#b36b4b" opacity=".55">
+        <circle cx="38" cy="52" r="2.5"/>
+        <circle cx="362" cy="60" r="2"/>
+        <circle cx="48" cy="146" r="2"/>
+        <circle cx="354" cy="144" r="2.5"/>
+    </g>
+</svg>

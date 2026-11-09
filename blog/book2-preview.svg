@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260" role="img" aria-labelledby="book2-preview-title">
+    <title id="book2-preview-title">Треугольник трёх моделей и исключённый четвёртый путь</title>
+    <defs>
+        <linearGradient id="book2-bg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#f7f1e7"/>
+            <stop offset="55%" stop-color="#eef3f1"/>
+            <stop offset="100%" stop-color="#e2ecec"/>
+        </linearGradient>
+        <radialGradient id="book2-gold" cx="42%" cy="35%" r="65%">
+            <stop offset="0%" stop-color="#fffaf0"/>
+            <stop offset="55%" stop-color="#ead6b5"/>
+            <stop offset="100%" stop-color="#c99c62"/>
+        </radialGradient>
+        <radialGradient id="book2-red" cx="42%" cy="35%" r="65%">
+            <stop offset="0%" stop-color="#fff7f4"/>
+            <stop offset="55%" stop-color="#e8cfc9"/>
+            <stop offset="100%" stop-color="#b77a6d"/>
+        </radialGradient>
+        <radialGradient id="book2-blue" cx="42%" cy="35%" r="65%">
+            <stop offset="0%" stop-color="#f4fbfc"/>
+            <stop offset="55%" stop-color="#cfe3e8"/>
+            <stop offset="100%" stop-color="#6f9aa8"/>
+        </radialGradient>
+        <radialGradient id="book2-cross" cx="42%" cy="35%" r="65%">
+            <stop offset="0%" stop-color="#6f98a6"/>
+            <stop offset="60%" stop-color="#3f6876"/>
+            <stop offset="100%" stop-color="#2d4f5c"/>
+        </radialGradient>
+        <filter id="book2-shadow" x="-30%" y="-30%" width="160%" height="160%">
+            <feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#2b2a28" flood-opacity=".12"/>
+        </filter>
+    </defs>
+    <rect width="400" height="260" fill="url(#book2-bg)"/>
+    <circle cx="200" cy="140" r="112" fill="none" stroke="rgba(58,95,111,.12)" stroke-dasharray="2 8"/>
+    <path d="M200 102 95 226h210L200 102Z" fill="none" stroke="rgba(58,95,111,.28)" stroke-width="1.4" stroke-dasharray="5 6"/>
+    <path d="M200 92V62" fill="none" stroke="rgba(58,95,111,.45)" stroke-width="1.4" stroke-dasharray="4 5"/>
+    <circle cx="200" cy="102" r="21" fill="url(#book2-gold)" filter="url(#book2-shadow)" opacity=".96"/>
+    <circle cx="95" cy="226" r="21" fill="url(#book2-red)" filter="url(#book2-shadow)" opacity=".96"/>
+    <circle cx="305" cy="226" r="21" fill="url(#book2-blue)" filter="url(#book2-shadow)" opacity=".96"/>
+    <circle cx="200" cy="34" r="28" fill="url(#book2-cross)" filter="url(#book2-shadow)"/>
+    <g stroke="#fff" stroke-width="2.6" stroke-linecap="round" opacity=".95">
+        <path d="M200 20v20M192 27h16"/>
+    </g>
+    <text x="200" y="138" text-anchor="middle" font-family="'Palatino Linotype', 'Book Antiqua', Palatino, serif" font-size="9" fill="#7a5330">Ориген</text>
+    <text x="95" y="256" text-anchor="middle" font-family="'Palatino Linotype', 'Book Antiqua', Palatino, serif" font-size="9" fill="#8a4d43">Пелагий</text>
+    <text x="305" y="256" text-anchor="middle" font-family="'Palatino Linotype', 'Book Antiqua', Palatino, serif" font-size="9" fill="#2f5a69">Августин</text>
+    <text x="234" y="38" text-anchor="start" font-family="'Palatino Linotype', 'Book Antiqua', Palatino, serif" font-size="9" fill="#2d4f5c">Синергия</text>
+    <g fill="#b36b4b" opacity=".55">
+        <circle cx="38" cy="52" r="2.5"/>
+        <circle cx="362" cy="60" r="2"/>
+        <circle cx="48" cy="146" r="2"/>
+        <circle cx="354" cy="144" r="2.5"/>
+    </g>
+</svg>
