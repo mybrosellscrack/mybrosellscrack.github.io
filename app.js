@@ -40,6 +40,7 @@ const SERIES = {
 
 const BOOK_SERIES = {
   id: "book",
+  hidden: true,
   kicker: "Разбор книги · 9 частей",
   badge: "Книга",
   title: "«История и философия монергизма»",
@@ -221,7 +222,7 @@ function renderBlog() {
     return;
   }
   blogEmpty.style.display = "none";
-  blogList.appendChild(renderSeriesCard(BOOK_SERIES));
+  if (!BOOK_SERIES.hidden) blogList.appendChild(renderSeriesCard(BOOK_SERIES));
   blogList.appendChild(renderSeriesCard(BOOSTY_SERIES));
   ARTICLES.forEach((article) => {
     const card = document.createElement("a");
