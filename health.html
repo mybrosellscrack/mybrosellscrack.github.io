@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Индекс душевного здоровья — Духовный дневник</title>
+    <meta name="description" content="Индекс душевного здоровья: триединая шкала Чувства, Воля, Желания. Тест работает локально в браузере." />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="blog.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="header-inner">
+        <div class="brand">
+          <div class="brand-title">Духовный дневник</div>
+          <div class="brand-subtitle">Индекс душевного здоровья</div>
+        </div>
+        <nav class="nav-bar">
+          <a class="nav-tab" href="index.html" data-target="blog">Блог</a>
+          <span class="nav-indicator"></span>
+        </nav>
+      </div>
+    </header>
+
+    <main class="app-main">
+      <section id="view-index" class="view active">
+        <div class="card">
+          <div class="view-header">
+            <h2>Индекс душевного здоровья</h2>
+          </div>
+          <div class="notice" style="background:#fff3cd;border-left:4px solid #ffc107;color:#856404;">
+            <strong>⚠️ Важно:</strong> Все данные теста хранятся только в локальном хранилище вашего браузера (localStorage). Никакие данные не передаются на сервер. При очистке кэша результаты будут потеряны.
+          </div>
+          <p class="hint">
+            Триединая шкала (Чувства, Воля, Желания) помогает диагностировать душевное состояние. Пройдите тест из 30 вопросов (по 10 на блок), а система автоматически подсчитает баллы и покажет интерпретацию.
+          </p>
+          <div class="index-summary">
+            <p>После прохождения теста нажмите «Сохранить результат» — баллы сохранятся локально. Дата последнего замера всегда видна внизу блока.</p>
+          </div>
+          <div class="index-grid">
+            <article class="index-block" data-block="F">
+              <div class="index-head">
+                <div>
+                  <div class="index-pin">F</div>
+                  <div class="index-title">Чувства</div>
+                </div>
+                <div class="index-score" data-score>0 / 30</div>
+              </div>
+              <p class="index-description">Эмоциональный фон, благодарность, способность к прощению.</p>
+              <div class="index-status" data-status></div>
+            </article>
+            <article class="index-block" data-block="W">
+              <div class="index-head">
+                <div>
+                  <div class="index-pin">W</div>
+                  <div class="index-title">Воля</div>
+                </div>
+                <div class="index-score" data-score>0 / 30</div>
+              </div>
+              <p class="index-description">Решимость, дисциплина, способность делать нужное.</p>
+              <div class="index-status" data-status></div>
+            </article>
+            <article class="index-block" data-block="D">
+              <div class="index-head">
+                <div>
+                  <div class="index-pin">D</div>
+                  <div class="index-title">Желания</div>
+                </div>
+                <div class="index-score" data-score>0 / 30</div>
+              </div>
+              <p class="index-description">Направленность стремлений: к Богу или к плотским притяжениям.</p>
+              <div class="index-status" data-status></div>
+            </article>
+          </div>
+          <form id="index-quiz-form" class="index-quiz">
+            <div id="index-questions" class="index-questions"></div>
+            <div class="index-quiz-actions">
+              <button type="submit" class="btn primary">Сохранить результат</button>
+              <p id="index-save-status" class="index-note"></p>
+            </div>
+          </form>
+          <div class="index-history">
+            <div class="index-history-header">
+              <h3>История замеров</h3>
+            </div>
+            <div id="index-history-list" class="index-history-list"></div>
+            <p id="index-history-empty" class="empty">Результатов пока нет.</p>
+          </div>
+          <div class="index-footer">
+            <p id="index-last-updated" class="index-note">Результаты ещё не фиксировались.</p>
+            <p class="index-note">Уровни: 0–7 Зелёный (гармония), 8–15 Жёлтый (следует быть внимательнее), 16–23 Оранжевый (нужна помощь духовника), 24–30 Красный (необходима решительная работа над собой).</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <a href="https://github.com/mybrosellscrack/mybrosellscrack.github.io" target="_blank">Исходный код на GitHub</a>
+      <span class="footer-divider">·</span>
+      <a href="https://yoomoney.ru/to/4100119492913829" target="_blank">Поддержать автора</a>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
