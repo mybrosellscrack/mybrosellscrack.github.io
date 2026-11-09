@@ -46,7 +46,7 @@
   overflow: hidden;
   aspect-ratio: 20 / 13;
   border-radius: 10px;
-  background: #f7f1e7;
+  background: #eef0f2;
 }
 
 .blog-thumb img {
@@ -290,15 +290,15 @@
   border-radius: 18px;
   background:
     radial-gradient(620px 260px at 100% 0%, rgba(179, 107, 75, 0.10), transparent 72%),
-    linear-gradient(145deg, rgba(58, 95, 111, 0.08), rgba(255, 253, 249, 0.92));
+    linear-gradient(145deg, rgba(58, 95, 111, 0.06), rgba(251, 252, 253, 0.94));
   box-shadow: 0 8px 22px rgba(34, 30, 24, 0.05);
 }
 
 .series-card--boosty {
-  border-color: rgba(179, 107, 75, 0.22);
+  border-color: rgba(58, 95, 111, 0.18);
   background:
     radial-gradient(620px 260px at 100% 0%, rgba(179, 107, 75, 0.14), transparent 72%),
-    linear-gradient(145deg, rgba(179, 107, 75, 0.08), rgba(255, 253, 249, 0.94));
+    linear-gradient(145deg, rgba(58, 95, 111, 0.05), rgba(251, 252, 253, 0.94));
 }
 
 .series-card__kicker {
@@ -371,7 +371,7 @@
   overflow: hidden;
   border: 1px solid rgba(43, 42, 40, 0.09);
   border-radius: 12px;
-  background: rgba(255, 253, 249, 0.86);
+  background: rgba(251, 252, 253, 0.9);
   color: var(--ink);
   text-decoration: none;
   transition: transform 0.18s ease, border-color 0.18s ease;
@@ -385,7 +385,7 @@
 .series-mini__thumb {
   aspect-ratio: 20 / 13;
   overflow: hidden;
-  background: #f7f1e7;
+  background: #eef0f2;
 }
 
 .series-mini__thumb img {

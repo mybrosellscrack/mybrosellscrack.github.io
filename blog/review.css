@@ -3,7 +3,7 @@
     --review-green-soft: rgba(61, 122, 90, 0.09);
     --review-red: #a34b3f;
     --review-red-soft: rgba(163, 75, 63, 0.08);
-    --review-cream: #fffdf9;
+    --review-cream: #fbfcfd;
     --review-line: rgba(43, 42, 40, 0.10);
     --review-line-strong: rgba(43, 42, 40, 0.16);
 }
@@ -1791,7 +1791,7 @@ html {
 .series-hub-card__cover {
     aspect-ratio: 20 / 13;
     overflow: hidden;
-    background: #f7f1e7;
+    background: #eef0f2;
 }
 
 .series-hub-card__cover img {

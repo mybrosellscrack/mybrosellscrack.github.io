@@ -1,5 +1,5 @@
 :root {
-  --bg: #f2efe9;
+  --bg: #eef0f2;
   --panel: #ffffff;
   --ink: #2b2a28;
   --muted: #6b6861;
@@ -21,9 +21,9 @@ body {
   font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
   color: var(--ink);
   background:
-    radial-gradient(1000px 400px at 10% -10%, rgba(179, 107, 75, 0.2), transparent),
-    radial-gradient(800px 500px at 90% 0%, rgba(58, 95, 111, 0.2), transparent),
-    var(--bg);
+    radial-gradient(1000px 420px at 10% -10%, rgba(117, 128, 138, 0.16), transparent 70%),
+    radial-gradient(900px 500px at 90% 0%, rgba(58, 95, 111, 0.10), transparent 72%),
+    linear-gradient(180deg, #f4f6f7 0%, var(--bg) 100%);
   min-height: 100vh;
 }
 
@@ -32,7 +32,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(242, 239, 233, 0.92);
+  background: rgba(244, 246, 247, 0.92);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
@@ -47,7 +47,22 @@ body {
 }
 
 .brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   flex-shrink: 0;
+}
+
+.brand-icon {
+  display: block;
+  width: 40px;
+  height: 40px;
+  border-radius: 11px;
+  flex: 0 0 auto;
+}
+
+.brand-text {
+  min-width: 0;
 }
 
 .brand-title {
@@ -100,6 +115,31 @@ body {
   border-radius: 10px;
   z-index: 1;
   transition: left 0.3s ease, width 0.3s ease;
+}
+
+@media (max-width: 380px) {
+  .app-header {
+    padding: 14px 12px 6px;
+  }
+
+  .header-inner {
+    gap: 8px;
+  }
+
+  .brand-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 9px;
+  }
+
+  .brand-title {
+    font-size: 18px;
+  }
+
+  .nav-tab {
+    padding: 7px 10px;
+    font-size: 12px;
+  }
 }
 
 .app-main {
@@ -214,7 +254,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  background: #fffdf9;
+  background: #fbfcfd;
   transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -420,7 +460,7 @@ body {
   border: 1px solid rgba(43, 42, 40, 0.08);
   border-radius: 14px;
   padding: 12px;
-  background: #fffdf9;
+  background: #fbfcfd;
 }
 
 .index-history-top {
@@ -470,7 +510,7 @@ body {
   border: 1px solid rgba(43, 42, 40, 0.08);
   border-radius: 10px;
   padding: 10px;
-  background: #fdfbf6;
+  background: #f7f9fa;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
